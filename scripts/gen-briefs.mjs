@@ -1,7 +1,7 @@
 // Generate one static HTML file per brief, with social-card meta baked in so
 // scrapers (which don't run JS) see the right title/description/image.
 // Run: npm run briefs   (also runs automatically before build)
-import { writeFileSync, mkdirSync } from 'fs';
+import { writeFileSync, mkdirSync, readFileSync } from 'fs';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { BRIEFS } from '../src/briefs.js';
@@ -54,4 +54,24 @@ for (const b of BRIEFS) {
   mkdirSync(dir, { recursive: true });
   writeFileSync(resolve(dir, 'index.html'), tpl(b));
 }
-console.log(`generated ${BRIEFS.length} brief pages (SITE_URL=${SITE})`);
+
+// Numbered shortcuts (/brief1 → /b/<first-slug>/, …) plus the slug itself,
+// written into vercel.json so they stay in sync with the briefs list.
+const vercelPath = resolve(root, 'vercel.json');
+let vercel = {};
+try {
+  vercel = JSON.parse(readFileSync(vercelPath, 'utf8'));
+} catch {
+  vercel = { buildCommand: 'npm run build', outputDirectory: 'dist' };
+}
+vercel.redirects = BRIEFS.flatMap((b, i) => {
+  const dest = `/b/${b.slug}/`;
+  return [
+    { source: `/brief${i + 1}`, destination: dest, permanent: false },
+    { source: `/brief${i + 1}/`, destination: dest, permanent: false },
+    { source: `/${b.slug}`, destination: dest, permanent: false },
+  ];
+});
+writeFileSync(vercelPath, JSON.stringify(vercel, null, 2) + '\n');
+
+console.log(`generated ${BRIEFS.length} brief pages + ${vercel.redirects.length} redirects (SITE_URL=${SITE})`);

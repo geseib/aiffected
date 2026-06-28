@@ -1,4 +1,51 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/brief1",
+      "destination": "/b/gdp-up-jobs-down/",
+      "permanent": false
+    },
+    {
+      "source": "/brief1/",
+      "destination": "/b/gdp-up-jobs-down/",
+      "permanent": false
+    },
+    {
+      "source": "/gdp-up-jobs-down",
+      "destination": "/b/gdp-up-jobs-down/",
+      "permanent": false
+    },
+    {
+      "source": "/brief2",
+      "destination": "/b/the-human-ledger/",
+      "permanent": false
+    },
+    {
+      "source": "/brief2/",
+      "destination": "/b/the-human-ledger/",
+      "permanent": false
+    },
+    {
+      "source": "/the-human-ledger",
+      "destination": "/b/the-human-ledger/",
+      "permanent": false
+    },
+    {
+      "source": "/brief3",
+      "destination": "/b/now-what/",
+      "permanent": false
+    },
+    {
+      "source": "/brief3/",
+      "destination": "/b/now-what/",
+      "permanent": false
+    },
+    {
+      "source": "/now-what",
+      "destination": "/b/now-what/",
+      "permanent": false
+    }
+  ]
 }
