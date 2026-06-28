@@ -11,8 +11,9 @@ export default function Society() {
           For 200 years, "get a job" has been society's answer to "how do I live?" When AI weakens that
           link, the question doesn't disappear — it moves up to the level of how we organize everything.
           There's no neutral answer, so don't look for one here. <strong>Take a position instead.</strong>{' '}
-          Decide each dilemma below; every choice will argue back, and your pattern of answers will name
-          the society you'd actually build.
+          Decide each dilemma below; every choice will argue back, your pattern of answers will name the
+          society you'd actually build — and it will tally what your model fixes and what it quietly
+          leaves open, because a paycheck was never the only thing a job paid out.
         </p>
       </div>
 

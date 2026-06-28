@@ -295,6 +295,25 @@ const TENSIONS = [
   },
 ];
 
+// What a job quietly provides beyond the paycheck. An income floor refunds the
+// first line; it leaves the other four open. That gap — boredom, drift, loss of
+// purpose and contribution — is the risk a money-only answer can't see.
+const LEDGER = [
+  { facet: 'A wage', note: 'income to live on', solved: true },
+  { facet: 'A shape to the day', note: 'somewhere to be, a reason to get up', solved: false },
+  { facet: 'A sense of contributing', note: 'the feeling of mattering to others', solved: false },
+  { facet: 'Status & identity', note: '“so… what do you do?”', solved: false },
+  { facet: 'A place to belong', note: 'colleagues, a team, a “we”', solved: false },
+];
+
+function ledgerVerdict(y) {
+  if (y >= 0.34)
+    return "Your contract pays the wage — and says nothing about the other four. It's cheap to hand someone an income; it's hard to give them a Monday that matters. Boredom, drift and a slow loss of purpose are risks your society has to take as seriously as poverty. The ones that make this work will have to grow meaning on purpose — through care, craft, community and play — the way earlier ones grew jobs.";
+  if (y <= -0.34)
+    return 'Your contract guards these fiercely — maybe too fiercely. Keeping work for the structure and standing it brings can trap people in jobs that exist mainly to occupy them, long after the machine could do the task itself.';
+  return "You're trying to keep what work gives without forcing the work itself — the hardest needle to thread. Whether a sense of contribution can survive being unhooked from employment is the open question your whole society rests on.";
+}
+
 function synthesize(sel) {
   const mean = (axis) => {
     const vals = DILEMMAS.filter((d) => d.axis === axis)
@@ -427,6 +446,26 @@ export default function SocialContract() {
                   <span><strong>Thrives:</strong> {r.archetype.thrives}</span>
                   <span><strong>Squeezed:</strong> {r.archetype.squeezed}</span>
                 </div>
+              </div>
+            )}
+
+            {r.answered >= 4 && (
+              <div className="sc-ledger">
+                <p className="sc-ledger-head">The human ledger</p>
+                <p className="sc-ledger-sub">
+                  A paycheck was never the only thing a job paid out. Money can replace one line here —
+                  not the rest:
+                </p>
+                <ul className="sc-ledger-list">
+                  {LEDGER.map((l) => (
+                    <li key={l.facet} className={l.solved ? 'solved' : 'open'}>
+                      <span className="sc-ledger-mark">{l.solved ? 'refunded' : 'open'}</span>
+                      <span className="sc-ledger-facet">{l.facet}</span>
+                      <span className="sc-ledger-note">{l.note}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="sc-ledger-verdict">{ledgerVerdict(r.y)}</p>
               </div>
             )}
 
