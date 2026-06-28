@@ -16,7 +16,7 @@ export default function Hero() {
           while <em className="down">1 in 5</em> people lose their jobs.
         </h1>
         <p className="hero-sub">
-          Not a contradiction. Arithmetic. Generative AI is prying apart two things we always assumed
+          Not a contradiction. Just math. Generative AI is pulling apart two things we always assumed
           moved together: <strong>what an economy produces</strong> and{' '}
           <strong>how many people it needs to produce it</strong>. Output keeps climbing. The paychecks
           don't. <Voice id="amodei" /> What's left is the question we keep dodging —{' '}
