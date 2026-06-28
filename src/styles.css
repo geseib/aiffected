@@ -2069,6 +2069,176 @@ input[type='range']::-moz-range-thumb {
   font-weight: 700;
 }
 
+/* ---------- Briefs (share-sized single-concept pages) ---------- */
+.brief {
+  position: relative;
+  min-height: 100vh;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(1.4rem, 4vw, 2.4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.brief-brand {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+.brief-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.1rem;
+}
+.brief-title {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(2rem, 6vw, 3.3rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+.brief-em {
+  font-style: italic;
+}
+.brief-em.up {
+  color: var(--up);
+}
+.brief-em.down {
+  color: var(--down);
+}
+.brief-em.accent {
+  color: var(--accent);
+}
+.brief-dek {
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+  color: var(--muted);
+  max-width: 56ch;
+  margin: 0;
+}
+.brief-visual {
+  margin: 0.6rem 0;
+}
+.brief-cta {
+  align-self: flex-start;
+  margin-top: 0.6rem;
+}
+.brief-foot {
+  font-size: 0.84rem;
+  color: var(--faint);
+  border-top: 1px solid var(--line);
+  padding-top: 1.2rem;
+}
+.brief-foot a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.brief-foot .brand-mark,
+.brief-brand .brand-mark {
+  color: var(--accent);
+}
+
+/* paradox visual */
+.brief-stats {
+  display: flex;
+  gap: 2.5rem;
+  margin-bottom: 1.1rem;
+}
+.brief-paradox .charts-row {
+  margin-bottom: 1.1rem;
+}
+.brief-slider {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--faint);
+}
+.brief-slider input[type='range'] {
+  flex: 1;
+}
+
+/* ledger visual */
+.brief-ledger {
+  font-size: 1.05rem;
+}
+.brief-ledger .sc-ledger-facet {
+  font-size: 1.02rem;
+}
+
+/* rings visual */
+.brief-rings {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  flex-wrap: wrap;
+}
+.brief-rings svg {
+  width: 220px;
+  height: 220px;
+  flex: 0 0 auto;
+}
+.brief-rings-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.brief-rings-legend span {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 1rem;
+  color: var(--ink);
+}
+.brief-rings-legend i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+/* OG card mode: fixed 1200x630 share image layout */
+.brief-og {
+  width: 1200px;
+  height: 630px;
+  min-height: 630px;
+  max-width: none;
+  margin: 0;
+  padding: 64px 72px;
+  justify-content: center;
+  overflow: hidden;
+}
+.brief-og .brief-brand {
+  display: none;
+}
+.brief-og .brief-body {
+  justify-content: center;
+}
+.brief-og .brief-title {
+  font-size: 3.4rem;
+}
+.brief-og .brief-dek {
+  font-size: 1.35rem;
+}
+.brief-og-brand {
+  position: absolute;
+  bottom: 52px;
+  right: 72px;
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: var(--muted);
+}
+.brief-og-brand .brand-mark {
+  color: var(--accent);
+}
+
 /* ---------- Reveal animation ---------- */
 .reveal {
   opacity: 0;

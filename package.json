@@ -5,8 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "briefs": "node scripts/gen-briefs.mjs",
+    "prebuild": "node scripts/gen-briefs.mjs",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "og": "node scripts/gen-og.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",
