@@ -1,5 +1,6 @@
 import { Reveal } from './Charts.jsx';
 import Voice from './Voice.jsx';
+import Term from './Term.jsx';
 
 const STEPS = [
   {
@@ -37,8 +38,8 @@ export default function Mechanism() {
         <h2>How does an economy grow while shedding workers?</h2>
         <p className="lede">
           A booming economy hires — that's the instinct, and it comes from a world where the only way to
-          make more was to employ more. <Voice id="brynjolfsson" /> AI breaks that rule. Here's how, in
-          four steps.
+          make more was to employ more. <Voice id="brynjolfsson" /> AI breaks that rule — economists
+          call the result <Term id="decoupling">the great decoupling</Term>. Here's how, in four steps.
         </p>
         <p className="voice-hint">
           <b>❝</b> The chips scattered through this page are real arguments — from economists, builders

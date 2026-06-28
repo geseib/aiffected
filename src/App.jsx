@@ -7,6 +7,7 @@ import Waves from './components/Waves.jsx';
 import Simulator from './components/Simulator.jsx';
 import Sectors from './components/Sectors.jsx';
 import Society from './components/Society.jsx';
+import Meaning from './components/Meaning.jsx';
 import VoicesSpectrum from './components/VoicesSpectrum.jsx';
 import Closing from './components/Closing.jsx';
 
@@ -25,6 +26,7 @@ export default function App() {
         <Simulator wave={wave} setWave={setWave} />
         <Sectors wave={wave} setWave={setWave} />
         <Society />
+        <Meaning />
         <VoicesSpectrum />
         <Closing />
       </main>

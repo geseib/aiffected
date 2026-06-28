@@ -3,6 +3,7 @@ import { compute, leversFor, PRESETS, firstPreset, WAVE_CFG } from '../model.js'
 import { LineChart, SplitBar, Gauge, Counter } from './Charts.jsx';
 import WaveToggle from './WaveToggle.jsx';
 import Voice from './Voice.jsx';
+import Term from './Term.jsx';
 
 export default function Simulator({ wave, setWave }) {
   const [active, setActive] = useState(firstPreset(wave).id);
@@ -94,7 +95,7 @@ export default function Simulator({ wave, setWave }) {
             <div className="headline-stats">
               <div className="hstat">
                 <Counter className="hstat-num up" value={r.gdpGrowth} format={(v) => `${gdpUp ? '+' : ''}${v.toFixed(0)}%`} />
-                <span className="hstat-cap">GDP {gdpUp ? 'larger' : 'smaller'}</span>
+                <span className="hstat-cap"><Term id="gdp">GDP</Term> {gdpUp ? 'larger' : 'smaller'}</span>
               </div>
               <div className="hstat">
                 <Counter className="hstat-num down" value={r.unemployment} format={(v) => `${v.toFixed(0)}%`} />
@@ -132,7 +133,7 @@ export default function Simulator({ wave, setWave }) {
 
             <div className="dist">
               <div className="dist-block">
-                <h4>Who captures the new income?</h4>
+                <h4>Who captures the new income? <Term id="laborshare">wages vs. capital</Term></h4>
                 <SplitBar
                   left={r.laborShare}
                   leftLabel="Wages (workers)"

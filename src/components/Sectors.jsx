@@ -28,16 +28,16 @@ const tone = (e) => (e >= 65 ? '#f87171' : e >= 45 ? '#fbbf24' : '#34d399');
 
 const COPY = {
   1: {
-    h: 'It starts with desk work',
-    p: 'Wave 1 hits cognitive and routine work first — the desks, not the job sites. The more of a sector’s day is text, code and predictable decisions, the more exposed it is. The trades and hands-on care look like safe high ground.',
+    h: 'It starts at the desk',
+    p: 'Wave 1 hits cognitive, routine work first — the desks, not the job sites. The more of a sector’s day is text, code and predictable calls, the more exposed it is. The trades and hands-on care look like safe high ground.',
   },
   2: {
     h: 'Then the safe ground floods',
-    p: 'Wave 2 is robotics. Watch the bottom half of this chart: warehouses, driving, assembly, repair, cleaning — the manual jobs people fled into for safety — surge into the danger zone. The high ground was only ever temporary.',
+    p: 'Wave 2 is robotics. Watch the bottom half of the chart: warehouses, driving, assembly, repair, cleaning — the manual jobs people fled into for safety — surge into the red. The high ground was only ever temporary.',
   },
   3: {
     h: 'Then almost nothing is out of range',
-    p: 'Wave 3 is autonomy. Exposure approaches the ceiling almost everywhere at once. The question stops being which jobs are safe and becomes whether “a job” is still how most people get a claim on what the economy produces.',
+    p: 'Wave 3 is autonomy. Exposure pins near the ceiling almost everywhere at once. The question stops being which jobs are safe and becomes whether “a job” is still how most people get a claim on what gets produced.',
   },
 };
 

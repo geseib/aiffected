@@ -23,7 +23,7 @@ const DILEMMAS = [
     eyebrow: 'Income & survival',
     q: 'Should a decent life require having a job?',
     context:
-      'Once AI can do much of the work, the link between holding a job and being able to live starts to stretch.',
+      'Once AI can do the work, the link between having a job and being able to live starts to snap.',
     options: [
       {
         id: 'earn',

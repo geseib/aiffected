@@ -4,6 +4,7 @@ const LINKS = [
   ['simulator', 'Simulator'],
   ['sectors', 'The jobs'],
   ['society', 'Society'],
+  ['meaning', 'Now what?'],
   ['voices', 'The chorus'],
   ['watch', 'What to watch'],
 ];

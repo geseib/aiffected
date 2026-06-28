@@ -197,6 +197,47 @@ export const VOICES = {
       'The case for meeting displacement with money, not moralising — basic income and a shorter week treated as serious policy rather than fantasy.',
     source: { label: '“Utopia for Realists” (2017)', url: 'https://en.wikipedia.org/wiki/Utopia_for_Realists' },
   },
+  frankl: {
+    name: 'Viktor Frankl',
+    role: 'Psychiatrist, “Man’s Search for Meaning”',
+    monogram: 'VF',
+    short: 'Frankl',
+    camp: 'purpose',
+    pos: 60,
+    quote: 'Life is never made unbearable by circumstances, but only by lack of meaning and purpose.',
+    preview: 'Life is made unbearable not by circumstances, but by a lack of meaning.',
+    context:
+      'A psychiatrist who survived the camps: people can endure almost anything with a “why,” and unravel without one. Money is a “how.” It was never the “why.”',
+    source: { label: '“Man’s Search for Meaning” (1946)', url: 'https://en.wikipedia.org/wiki/Man%27s_Search_for_Meaning' },
+  },
+  arendt: {
+    name: 'Hannah Arendt',
+    role: 'Philosopher, “The Human Condition”',
+    monogram: 'HA',
+    short: 'Arendt',
+    camp: 'purpose',
+    pos: 64,
+    quote:
+      'It is a society of laborers which is about to be liberated from the fetters of labor, and this society does no longer know of those other and higher activities for the sake of which this freedom would deserve to be won.',
+    preview: 'A society of laborers about to be freed from labor — that no longer knows what to do with the freedom.',
+    context:
+      'Written in 1958, aimed squarely at now: we organized life around work so completely that we may have forgotten how to live without it.',
+    source: { label: '“The Human Condition” (1958)', url: 'https://en.wikipedia.org/wiki/The_Human_Condition_(Arendt_book)' },
+  },
+  putnam: {
+    name: 'Robert Putnam',
+    role: 'Political scientist, “Bowling Alone”',
+    monogram: 'RP',
+    short: 'Putnam',
+    camp: 'civic',
+    pos: 70,
+    quote:
+      'Social capital — the web of connections among us — has been in steady decline, and we are the poorer and lonelier for it.',
+    preview: 'Our connections to one another have been quietly collapsing — and we are the lonelier for it.',
+    context:
+      'His decades of data on community: belonging doesn’t maintain itself. If the workplace stops supplying it, something else has to be built — deliberately.',
+    source: { label: '“Bowling Alone” (2000)', url: 'https://en.wikipedia.org/wiki/Bowling_Alone' },
+  },
 };
 
 export const VOICE_ORDER = Object.keys(VOICES).sort((a, b) => VOICES[a].pos - VOICES[b].pos);

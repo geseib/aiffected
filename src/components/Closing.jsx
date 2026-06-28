@@ -2,16 +2,16 @@ import { Reveal } from './Charts.jsx';
 
 const DIALS = [
   {
-    q: 'How much replaces vs. assists?',
-    a: 'If AI mostly makes workers faster, paychecks survive. If it removes the worker, they don\'t. This single dial decides whether the boom is shared or hoarded.',
+    q: 'Replace, or assist?',
+    a: 'If AI makes workers faster, paychecks survive. If it removes the worker, they don\'t. This one dial decides whether the boom is shared or hoarded.',
   },
   {
     q: 'How fast does new work appear?',
-    a: 'Every past wave eventually created more jobs than it destroyed — but "eventually" can be a decade of pain. Speed matters as much as direction.',
+    a: 'Every past wave eventually made more jobs than it killed. But "eventually" can be a decade of wreckage — and speed matters as much as direction.',
   },
   {
     q: 'Who owns the machines?',
-    a: 'When output detaches from labour, income flows to whoever owns the AI. Whether that\'s a few firms or the broad public is a choice, not a law of nature.',
+    a: 'When output detaches from labour, the income flows to whoever owns the AI. A few firms, or the broad public — that\'s a choice, not a law.',
   },
 ];
 
@@ -22,8 +22,8 @@ export default function Closing() {
         <p className="eyebrow">What to watch</p>
         <h2>Three dials decide which decade we get</h2>
         <p className="lede">
-          The technology is mostly settled — it works and it's spreading. What's still open is how we
-          respond. Watch these three, in the news and in your own workplace.
+          The technology is mostly settled. It works, and it's spreading. What's still open is what we do
+          about it — so watch these three, in the headlines and in your own job.
         </p>
       </div>
 
