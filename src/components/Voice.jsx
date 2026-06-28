@@ -19,8 +19,10 @@ export default function Voice({ id }) {
       </button>
       <span className="voice-pop" role="tooltip" aria-hidden="true">
         <span className="voice-pop-name">{v.name}</span>
-        <span className="voice-pop-quote">{v.preview}</span>
-        <span className="voice-pop-hint">click to read &amp; source ↗</span>
+        <span className={`voice-pop-quote ${v.verbatim === false ? 'para' : ''}`}>{v.preview}</span>
+        <span className="voice-pop-hint">
+          {v.verbatim === false ? 'paraphrase · click for source ↗' : 'click to read & source ↗'}
+        </span>
       </span>
     </span>
   );

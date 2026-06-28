@@ -40,8 +40,16 @@ export function VoicesProvider({ children }) {
               <button className="vmodal-x" onClick={close} aria-label="Close">
                 ×
               </button>
-              <span className="vmodal-camp">{CAMPS[v.camp].label}</span>
-              <blockquote className="vmodal-quote">{v.quote}</blockquote>
+              <span className="vmodal-camp">
+                {CAMPS[v.camp].label}
+                {v.verbatim === false && <span className="vmodal-para">paraphrase</span>}
+              </span>
+              <blockquote className={`vmodal-quote ${v.verbatim === false ? 'para' : ''}`}>{v.quote}</blockquote>
+              {v.verbatim === false && (
+                <p className="vmodal-note">
+                  A summary of their argument, not a verbatim quote — follow the link for their exact words.
+                </p>
+              )}
               <div className="vmodal-attr">
                 <span className="vmodal-mono">{v.monogram}</span>
                 <div>

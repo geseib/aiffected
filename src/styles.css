@@ -1716,6 +1716,10 @@ input[type='range']::-moz-range-thumb {
 .voice-pop-quote::after {
   content: '”';
 }
+.voice-pop-quote.para::before,
+.voice-pop-quote.para::after {
+  content: '';
+}
 .voice-pop-hint {
   font-family: var(--mono);
   font-size: 0.62rem;
@@ -1816,6 +1820,29 @@ input[type='range']::-moz-range-thumb {
 .vmodal-quote::after {
   content: '”';
   color: var(--vc);
+}
+.vmodal-quote.para::before,
+.vmodal-quote.para::after {
+  content: '';
+}
+.vmodal-quote.para {
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.8vw, 1.45rem);
+  color: var(--muted);
+}
+.vmodal-para {
+  margin-left: 0.6rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+.vmodal-note {
+  margin: -0.6rem 0 1.2rem;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--faint);
 }
 .vmodal-attr {
   display: flex;
@@ -2005,6 +2032,13 @@ input[type='range']::-moz-range-thumb {
 }
 .voice-card-quote::after {
   content: '”';
+}
+.voice-card-quote.para::before,
+.voice-card-quote.para::after {
+  content: '';
+}
+.voice-card-quote.para {
+  font-style: italic;
 }
 .voice-card-camp {
   grid-column: 2;

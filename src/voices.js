@@ -40,12 +40,13 @@ export const VOICES = {
     short: 'Amodei',
     camp: 'builder',
     pos: 28,
+    verbatim: false,
     quote:
-      'AI could eliminate half of all entry-level white-collar jobs — and spike unemployment to 10–20% in the next one to five years.',
-    preview: 'AI could spike unemployment to 10–20% in the next one to five years.',
+      'AI could wipe out half of all entry-level white-collar jobs and push unemployment to 10–20% within one to five years.',
+    preview: 'AI could push unemployment to 10–20% within five years.',
     context:
       'Not a critic — the head of a leading AI lab, putting hard numbers on the disruption. This page exists because a builder said the quiet part out loud.',
-    source: { label: 'Anthropic CEO, 2025 (Axios)', url: 'https://www.axios.com/2025/05/28/ai-jobs-white-collar-half-eliminate-anthropic-dario-amodei' },
+    source: { label: 'Anthropic CEO, 2025 (as reported by Axios)', url: 'https://www.axios.com/2025/05/28/ai-jobs-white-collar-unemployment-anthropic' },
   },
   brynjolfsson: {
     name: 'Erik Brynjolfsson',
@@ -55,8 +56,8 @@ export const VOICES = {
     camp: 'economist',
     pos: 44,
     quote:
-      "There's no economic law that says everyone, or even most people, will automatically benefit from technological progress.",
-    preview: "There's no economic law that says most people automatically benefit from technological progress.",
+      "There's no economic law that says that when technology advances, everybody necessarily benefits. Some people, even a majority of people, could be made worse off.",
+    preview: 'No economic law says everybody benefits when technology advances — most people could be made worse off.',
     context:
       'Named “the great decoupling” — productivity and median incomes pulling apart. The exact mechanism this whole page is built on.',
     source: { label: '“The Second Machine Age” (2014)', url: 'https://en.wikipedia.org/wiki/The_Second_Machine_Age' },
@@ -116,8 +117,8 @@ export const VOICES = {
     camp: 'civic',
     pos: 66,
     quote:
-      'Whether a universal basic income is the right model… that is a debate that we will be having over the next ten or twenty years.',
-    preview: 'Universal basic income… a debate for the next ten or twenty years.',
+      "Whether a universal income is the right model — is it going to be accepted by a broad base of people? — that's a debate that we'll be having over the next ten or twenty years.",
+    preview: 'A universal income… a debate for the next ten or twenty years.',
     context:
       'A sitting president, in 2016, naming the redistribution question as a defining economic debate of the AI era — long before it was urgent.',
     source: { label: 'Wired, Oct 2016 (with Joi Ito)', url: 'https://www.wired.com/2016/10/president-obama-mit-joi-ito-interview/' },
@@ -130,8 +131,8 @@ export const VOICES = {
     camp: 'economist',
     pos: 72,
     quote:
-      'There is nothing automatic about new technologies bringing widespread prosperity. Whether they do is a choice.',
-    preview: 'Nothing automatic about new technology bringing shared prosperity. It is a choice.',
+      'There is nothing automatic about new technologies bringing widespread prosperity. Whether they do or not is an economic, social, and political choice.',
+    preview: 'Nothing automatic about new technology bringing prosperity — whether it does is a choice.',
     context:
       'The thesis of this entire page, from a Nobel economist: the technology sets the stakes; institutions and power decide who the gains reach.',
     source: { label: '“Power and Progress” (2023)', url: 'https://en.wikipedia.org/wiki/Power_and_Progress' },
@@ -231,9 +232,10 @@ export const VOICES = {
     short: 'Putnam',
     camp: 'civic',
     pos: 70,
+    verbatim: false,
     quote:
-      'Social capital — the web of connections among us — has been in steady decline, and we are the poorer and lonelier for it.',
-    preview: 'Our connections to one another have been quietly collapsing — and we are the lonelier for it.',
+      'Over the past few decades Americans have grown increasingly disconnected — from clubs, churches, neighbours and one another — and our stock of social capital has fallen with them.',
+    preview: 'Americans have grown disconnected from clubs, churches, neighbours — and one another.',
     context:
       'His decades of data on community: belonging doesn’t maintain itself. If the workplace stops supplying it, something else has to be built — deliberately.',
     source: { label: '“Bowling Alone” (2000)', url: 'https://en.wikipedia.org/wiki/Bowling_Alone' },

@@ -42,9 +42,12 @@ export default function VoicesSpectrum() {
                 <span className="voice-card-body">
                   <span className="voice-card-name">{v.name}</span>
                   <span className="voice-card-role">{v.role}</span>
-                  <span className="voice-card-quote">{v.preview}</span>
+                  <span className={`voice-card-quote ${v.verbatim === false ? 'para' : ''}`}>{v.preview}</span>
                 </span>
-                <span className="voice-card-camp">{CAMPS[v.camp].label}</span>
+                <span className="voice-card-camp">
+                  {CAMPS[v.camp].label}
+                  {v.verbatim === false && ' · paraphrase'}
+                </span>
               </button>
             );
           })}
@@ -52,8 +55,9 @@ export default function VoicesSpectrum() {
       </Reveal>
 
       <p className="voices-foot">
-        Quotes are drawn from the linked works and public interviews — follow each link to read them in
-        full and in context. A chorus, not a verdict: the disagreement is the point.
+        Quotes are verbatim from the linked works and interviews; the few marked{' '}
+        <em>paraphrase</em> are summaries of an argument, not direct quotes — follow the link for the
+        exact words. A chorus, not a verdict: the disagreement is the point.
       </p>
     </section>
   );
