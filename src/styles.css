@@ -743,14 +743,25 @@ input[type='range']::-moz-range-thumb {
   font-size: 0.92rem;
   margin: 0 0 1.1rem;
 }
+.sc-howto {
+  font-size: 0.85rem;
+  color: var(--faint);
+  margin: 0 0 1.2rem;
+  font-style: italic;
+}
 .sc-opts {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
-.sc-opt {
+.sc-opt-wrap {
+  position: relative;
   flex: 1 1 auto;
   min-width: 150px;
+  display: flex;
+}
+.sc-opt {
+  width: 100%;
   text-align: left;
   padding: 0.7rem 0.9rem;
   border-radius: 11px;
@@ -766,6 +777,51 @@ input[type='range']::-moz-range-thumb {
 .sc-opt:hover {
   border-color: rgba(94, 234, 212, 0.45);
   transform: translateY(-1px);
+}
+
+/* hover/focus narrative tooltip */
+.sc-tip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  width: max-content;
+  max-width: 250px;
+  padding: 0.65rem 0.8rem;
+  background: #0b1119;
+  color: var(--muted);
+  border: 1px solid rgba(94, 234, 212, 0.35);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-align: left;
+  box-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 30;
+}
+.sc-tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #0b1119;
+}
+.sc-opt-wrap:hover .sc-tip,
+.sc-opt:focus-visible + .sc-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+@media (hover: none) {
+  /* on touch devices there is no hover; tapping reveals the for/against voices */
+  .sc-tip {
+    display: none;
+  }
 }
 .sc-opt.on {
   border-color: var(--accent);

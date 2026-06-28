@@ -7,6 +7,10 @@ import { useMemo, useState } from 'react';
 // is synthesized into a political-philosophy compass + an archetype + the
 // contradictions hiding in the reader's own answers.
 //
+// Each stance also carries a `blurb`: a neutral, plain-language preview of what
+// the position actually means, shown as a tooltip on hover/focus — so a reader
+// can understand a choice before committing to the for/against voices.
+//
 // Two axes:
 //   x:  market (−)  ……  collective (+)     — who owns & steers
 //   y:  work-centric (−)  ……  post-work (+) — is income/meaning tied to jobs
@@ -25,6 +29,8 @@ const DILEMMAS = [
         id: 'earn',
         label: 'You earn your living',
         score: -1,
+        blurb:
+          'Income stays earned through work. No job means no automatic support — the traditional contract, held to even as jobs get scarcer.',
         ally: 'Earning your keep has held for centuries — it ties reward to contribution and keeps effort meaningful.',
         challenge:
           "If there aren't enough jobs to go around, “earn your living” quietly becomes “go without” for millions who'd work if they could.",
@@ -33,6 +39,8 @@ const DILEMMAS = [
         id: 'mix',
         label: 'A floor — plus more if you work',
         score: 0,
+        blurb:
+          'A guaranteed baseline everyone gets, with working still paying noticeably more on top. Security and incentive, side by side.',
         ally: 'A floor that work builds on keeps both the safety and the incentive: nobody starves, but effort still pays.',
         challenge:
           "It all rides on the dial — set the floor too low and it's no safety net; too high and the reward for working stops mattering.",
@@ -41,6 +49,8 @@ const DILEMMAS = [
         id: 'floor',
         label: 'Everyone gets a floor, job or not',
         score: 1,
+        blurb:
+          'A universal income or set of services that arrive whether or not you have a job. Survival becomes unconditional, unhooked from employment.',
         ally: 'Unhook survival from employment and a lost job becomes a transition, not a catastrophe — exactly the shock AI is about to deliver.',
         challenge:
           'A floor for all is enormously expensive, and critics warn it can loosen the link between contribution and reward that makes an economy run.',
@@ -59,6 +69,8 @@ const DILEMMAS = [
         id: 'protect',
         label: 'Work is meaning — protect jobs',
         score: -1,
+        blurb:
+          'Policy actively defends existing jobs — through subsidies, rules, or slower automation — because work itself is treated as worth preserving.',
         ally: 'For most people a job is where purpose, routine and dignity come from. Defend that and you defend something money cannot replace.',
         challenge:
           'Protecting jobs can shade into preserving busywork — paying people to do what a machine already does better, just to keep them occupied.',
@@ -67,6 +79,8 @@ const DILEMMAS = [
         id: 'redefine',
         label: 'Shift what counts as work',
         score: 0,
+        blurb:
+          'We widen what counts as a job — paying people for care, community, teaching, art and learning that the market currently undervalues.',
         ally: 'Care, community, art and learning are real work the market underpays. Redirect people there and work expands rather than vanishes.',
         challenge:
           "Someone still has to value and fund that work — calling it important doesn't automatically pay anyone's rent.",
@@ -75,6 +89,8 @@ const DILEMMAS = [
         id: 'liberate',
         label: 'Free people from toil',
         score: 1,
+        blurb:
+          'We treat less human work as the goal, not the problem, and reorganize life around the time and freedom that machines hand back.',
         ally: "Most of history's drudgery was never the point. If machines take it, that's the promise of progress finally paying out as time and freedom.",
         challenge:
           'A life without imposed work sounds great until you ask what replaces the structure, status and belonging that jobs quietly provided.',
@@ -93,6 +109,8 @@ const DILEMMAS = [
         id: 'spring',
         label: 'Springboard them back to work',
         score: -1,
+        blurb:
+          'Money flows mainly into retraining and new-sector investment. The bet: displacement is temporary, so move people quickly into the next job.',
         ally: 'Reskilling and new-sector investment treat displacement as temporary and keep people as earners, not dependents.',
         challenge:
           "Retraining assumes the new jobs exist and people can reach them in time — you can't reskill a 50-year-old trucker into an AI specialist overnight, or at scale.",
@@ -101,14 +119,18 @@ const DILEMMAS = [
         id: 'both',
         label: 'Both, in balance',
         score: 0,
+        blurb:
+          'Resources split between catching people (security now) and launching them (retraining next), refusing to pick one over the other.',
         ally: "Catch people and move them — a cushion that doesn't trap, a springboard that doesn't drop anyone. Most successful transitions did both.",
         challenge:
-          "“Both” is easy to say and expensive to do; when budgets tighten, one of them always gets cut first.",
+          '“Both” is easy to say and expensive to do; when budgets tighten, one of them always gets cut first.',
       },
       {
         id: 'secure',
         label: 'Cushion — guarantee security first',
         score: 1,
+        blurb:
+          'Security comes first and unconditionally. Only once people are stable do you turn to moving them into new work.',
         ally: 'You cannot retrain from a position of panic. Guaranteed security is the floor that makes every other adjustment possible.',
         challenge:
           'A cushion with no springboard risks leaving whole regions on permanent support — secure, but sidelined.',
@@ -127,6 +149,8 @@ const DILEMMAS = [
         id: 'builders',
         label: 'Those who built and funded it',
         score: -1,
+        blurb:
+          'The firms and investors who built the AI keep the profits. Light taxation; the gains flow to owners and shareholders.',
         ally: 'Reward the risk-takers and you keep the engine of investment running — nobody builds the next breakthrough if the upside is confiscated.',
         challenge:
           "When a few firms capture gains built on everyone's data and decades of public research, “they earned it” starts to wobble.",
@@ -135,6 +159,8 @@ const DILEMMAS = [
         id: 'tax',
         label: 'Markets keep it — taxed to share some',
         score: 0,
+        blurb:
+          'Markets keep the gains, but higher taxes skim a share to fund public services and transfers — the social-democratic route.',
         ally: 'Let markets allocate, then tax the windfall to fund the commons — the model that built every modern social democracy.',
         challenge:
           'Capital is mobile and good at avoiding tax; the windfall can slip offshore faster than any treasury can catch it.',
@@ -143,6 +169,8 @@ const DILEMMAS = [
         id: 'shared',
         label: 'A shared inheritance for everyone',
         score: 1,
+        blurb:
+          'The windfall is treated as collectively owned — paid out through dividends, public stakes, or data royalties to everyone.',
         ally: "Today's AI stands on centuries of collective knowledge and public data — treating its gains as a common inheritance has a real moral claim.",
         challenge:
           "Declaring the gains “everyone's” is easy; doing it without killing the incentive to build the thing in the first place is the hard part.",
@@ -161,6 +189,8 @@ const DILEMMAS = [
         id: 'market',
         label: 'Markets and firms — they move fastest',
         score: -1,
+        blurb:
+          'Government largely stays out. Companies and competition decide how fast, and where, AI gets deployed.',
         ally: 'Decentralized markets adapt faster than any committee, finding uses and fixes no central planner could foresee.',
         challenge:
           'Markets optimize for profit, not for whether your town still has work in ten years. Speed is not the same as direction.',
@@ -169,6 +199,8 @@ const DILEMMAS = [
         id: 'guardrails',
         label: 'Light guardrails, mostly markets',
         score: 0,
+        blurb:
+          'A few baseline rules — safety, transparency, antitrust — but within them, the market runs the show.',
         ally: 'Set a few rules of the road and let markets run — fast, but not feral.',
         challenge:
           '“Light” guardrails have a way of being written by the very firms they are meant to guard against.',
@@ -177,6 +209,8 @@ const DILEMMAS = [
         id: 'democratic',
         label: 'Democratic institutions must steer',
         score: 1,
+        blurb:
+          'Elected institutions actively set the pace, rules and priorities of the rollout — not just shareholders.',
         ally: 'A shift this big touches everyone, so everyone should have a say — through elections and public institutions, not only shareholders.',
         challenge:
           'Democratic steering is slow and capturable; by the time policy catches up, the technology has moved three steps on.',
@@ -195,6 +229,8 @@ const DILEMMAS = [
         id: 'winners',
         label: 'Let the winners win',
         score: -1,
+        blurb:
+          "Concentration is allowed to stand. If a few firms or people own most of the AI, that's accepted as the price of progress.",
         ally: 'Concentration often reflects who built the best thing; breaking that up can punish success and slow the very progress we want.',
         challenge:
           "When a few owners capture an economy-wide windfall, you don't just get inequality — you get political power that's hard to vote against.",
@@ -203,6 +239,8 @@ const DILEMMAS = [
         id: 'watch',
         label: 'Allow it, but watch it closely',
         score: 0,
+        blurb:
+          'Dominant players are permitted but policed — antitrust, audits and transparency keep them honest.',
         ally: 'Antitrust and transparency can keep dominant players honest without dismantling what works.',
         challenge:
           'Watching closely rarely keeps pace with firms that can out-lawyer and out-lobby any regulator.',
@@ -211,6 +249,8 @@ const DILEMMAS = [
         id: 'spread',
         label: 'Spread ownership broadly',
         score: 1,
+        blurb:
+          'Ownership is deliberately broadened — sovereign wealth funds, employee equity, public stakes — so the upside is widely held.',
         ally: 'Sovereign wealth funds, broad equity and data dividends let everyone own a slice of the machines. If capital wins, make everyone a capitalist.',
         challenge:
           'Spreading ownership by fiat is hard to design and easy to botch — get it wrong and you blunt the incentives that make the assets valuable.',
@@ -343,19 +383,16 @@ function Compass({ x, y, show }) {
   return (
     <svg viewBox="0 0 260 260" className="sc-compass" role="img" aria-label="Your position on the social-contract compass">
       <rect x="14" y="14" width="232" height="232" rx="14" className="sc-comp-bg" />
-      {/* quadrant tints */}
       <rect x="14" y="14" width="116" height="116" className="sc-quad q-private" />
       <rect x="130" y="14" width="116" height="116" className="sc-quad q-commons" />
       <rect x="14" y="130" width="116" height="116" className="sc-quad q-frontier" />
       <rect x="130" y="130" width="116" height="116" className="sc-quad q-republic" />
       <line x1="130" y1="22" x2="130" y2="238" className="sc-axis" />
       <line x1="22" y1="130" x2="238" y2="130" className="sc-axis" />
-      {/* quadrant labels */}
       <text x="26" y="34" className="sc-quad-label">Private Abundance</text>
       <text x="234" y="34" textAnchor="end" className="sc-quad-label">The Commons</text>
       <text x="26" y="232" className="sc-quad-label">Frontier Capitalism</text>
       <text x="234" y="232" textAnchor="end" className="sc-quad-label">Full-Employment</text>
-      {/* axis ends */}
       <text x="130" y="252" textAnchor="middle" className="sc-axis-end">Work-centric</text>
       <text x="130" y="11" textAnchor="middle" className="sc-axis-end">Post-work</text>
       <text x="8" y="133" className="sc-axis-end sc-vert">Market</text>
@@ -380,6 +417,7 @@ export default function SocialContract() {
 
   return (
     <div className="sc">
+      <p className="sc-howto">Hover a choice to see what it means — then pick one and it'll argue back.</p>
       <div className="sc-grid">
         {/* The board */}
         <div className="sc-board">
@@ -393,14 +431,19 @@ export default function SocialContract() {
                 <p className="sc-context">{d.context}</p>
                 <div className="sc-opts">
                   {d.options.map((o) => (
-                    <button
-                      key={o.id}
-                      className={`sc-opt ${chosen === o.id ? 'on' : ''}`}
-                      aria-pressed={chosen === o.id}
-                      onClick={() => pick(d.id, o.id)}
-                    >
-                      {o.label}
-                    </button>
+                    <span className="sc-opt-wrap" key={o.id}>
+                      <button
+                        className={`sc-opt ${chosen === o.id ? 'on' : ''}`}
+                        aria-pressed={chosen === o.id}
+                        aria-describedby={`tip-${d.id}-${o.id}`}
+                        onClick={() => pick(d.id, o.id)}
+                      >
+                        {o.label}
+                      </button>
+                      <span className="sc-tip" role="tooltip" id={`tip-${d.id}-${o.id}`}>
+                        {o.blurb}
+                      </span>
+                    </span>
                   ))}
                 </div>
                 {opt && (
