@@ -41,6 +41,7 @@ export const VOICES = {
     camp: 'builder',
     pos: 28,
     verbatim: false,
+    counter: 'autor',
     quote:
       'AI could wipe out half of all entry-level white-collar jobs and push unemployment to 10–20% within one to five years.',
     preview: 'AI could push unemployment to 10–20% within five years.',
@@ -86,6 +87,7 @@ export const VOICES = {
     short: 'Frey & Osborne',
     camp: 'economist',
     pos: 55,
+    counter: 'oecd',
     quote: 'About 47% of total US employment is at risk of computerisation.',
     preview: 'About 47% of US jobs are at risk of computerisation.',
     context:
@@ -175,6 +177,7 @@ export const VOICES = {
     short: 'Harari',
     camp: 'critic',
     pos: 85,
+    counter: 'bessen',
     quote:
       'The most important question in 21st-century economics may well be: what should we do with all the superfluous people?',
     preview: 'What should we do with all the “superfluous” people?',
@@ -239,6 +242,53 @@ export const VOICES = {
     context:
       'His decades of data on community: belonging doesn’t maintain itself. If the workplace stops supplying it, something else has to be built — deliberately.',
     source: { label: '“Bowling Alone” (2000)', url: 'https://en.wikipedia.org/wiki/Bowling_Alone' },
+  },
+  autor: {
+    name: 'David Autor',
+    role: 'MIT labour economist',
+    monogram: 'DHA',
+    short: 'Autor',
+    camp: 'economist',
+    pos: 34,
+    counter: 'amodei',
+    quote:
+      'Journalists and even expert commentators tend to overstate the extent of machine substitution for human labor, and ignore the strong complementarities between automation and labor.',
+    preview: 'Commentators overstate machine substitution — and ignore how automation complements labour.',
+    context:
+      'The leading labour economist on automation, and the central rebuttal to this whole page: machines don’t only replace workers, they make them more productive — and roughly 60% of the jobs people do today are in occupations that didn’t exist in 1940.',
+    source: { label: '“Why Are There Still So Many Jobs?” (2015)', url: 'https://www.aeaweb.org/articles?id=10.1257/jep.29.3.3' },
+  },
+  bessen: {
+    name: 'James Bessen',
+    role: 'Economist, Boston University',
+    monogram: 'JB',
+    short: 'Bessen',
+    camp: 'economist',
+    pos: 26,
+    verbatim: false,
+    counter: 'harari',
+    quote:
+      'After the ATM automated cash handling, the number of bank tellers in America actually rose — cheaper branches multiplied, and tellers shifted to work machines couldn’t do.',
+    preview: 'After the ATM, the number of bank tellers actually rose.',
+    context:
+      'The classic case against “automation means fewer jobs.” Automating part of a job can make it cheaper, expand demand, and create more of the work — not less.',
+    source: { label: 'James Bessen, “Learning by Doing” (2015)', url: 'https://www.theatlantic.com/business/archive/2016/01/automation-paradox/424437/' },
+  },
+  oecd: {
+    name: 'Arntz, Gregory & Zierahn',
+    role: 'OECD automation study',
+    monogram: 'OECD',
+    short: 'the OECD study',
+    camp: 'economist',
+    pos: 38,
+    verbatim: false,
+    counter: 'frey',
+    quote:
+      'Measured task-by-task rather than whole-occupation, only about 9% of jobs are at high risk of automation — not 47%.',
+    preview: 'Measured by tasks, only ~9% of jobs are at high risk — not 47%.',
+    context:
+      'The direct rebuttal to the Frey & Osborne 47% figure: most jobs are bundles of tasks, only some of which automate, so whole occupations rarely vanish outright.',
+    source: { label: 'OECD (Arntz, Gregory & Zierahn, 2016)', url: 'https://www.oecd-ilibrary.org/employment/the-risk-of-automation-for-jobs-in-oecd-countries_5jlz9h56dvq7-en' },
   },
 };
 

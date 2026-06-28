@@ -61,6 +61,11 @@ export function VoicesProvider({ children }) {
               <a className="vmodal-source" href={v.source.url} target="_blank" rel="noopener noreferrer">
                 {v.source.label} ↗
               </a>
+              {v.counter && VOICES[v.counter] && (
+                <button className="vmodal-counter" onClick={() => open(v.counter)}>
+                  ⇄ The counter-case: <strong>{VOICES[v.counter].name}</strong>
+                </button>
+              )}
             </div>
           </div>,
           document.body

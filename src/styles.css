@@ -1441,6 +1441,158 @@ input[type='range']::-moz-range-thumb {
   color: var(--muted);
 }
 
+/* ---------- "Is this alarmism?" objection section ---------- */
+.alarmist-q {
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: clamp(1.4rem, 4vw, 2rem);
+  margin-bottom: 1.6rem;
+}
+.alarmist-q h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+.alarmist-opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.alarmist-opt {
+  flex: 1 1 220px;
+  text-align: left;
+  padding: 0.9rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.12s;
+}
+.alarmist-opt:hover {
+  transform: translateY(-2px);
+  border-color: rgba(94, 234, 212, 0.4);
+}
+.alarmist-opt.on {
+  border-color: var(--accent);
+  background: rgba(94, 234, 212, 0.1);
+}
+.alarmist-resp {
+  margin-top: 1.1rem;
+  padding: 1.1rem 1.3rem;
+  background: rgba(94, 234, 212, 0.06);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  animation: voicesIn 0.4s ease;
+}
+.alarmist-resp p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+.alarmist-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.alarmist-col {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.5rem 1.6rem;
+  border-top: 3px solid var(--line);
+}
+.alarmist-col.yes {
+  border-top-color: var(--up);
+}
+.alarmist-col.no {
+  border-top-color: var(--down);
+}
+.alarmist-col h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+.alarmist-col ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+}
+.alarmist-col li {
+  position: relative;
+  padding-left: 1.3rem;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+.alarmist-col li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.alarmist-col.yes li::before {
+  content: '✓';
+  color: var(--up);
+}
+.alarmist-col.no li::before {
+  content: '✕';
+  color: var(--down);
+}
+.alarmist-voices {
+  margin: 1.1rem 0 0;
+}
+.alarmist-close {
+  margin-top: 1.6rem;
+  padding: 1.5rem 1.7rem;
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.06), rgba(248, 113, 113, 0.06));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.alarmist-close p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+.alarmist-close strong {
+  color: var(--ink);
+}
+@media (max-width: 760px) {
+  .alarmist-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* counter-case button inside the voice modal */
+.vmodal-counter {
+  display: block;
+  width: 100%;
+  margin-top: 0.9rem;
+  padding: 0.7rem 1rem;
+  border-radius: 11px;
+  border: 1px dashed var(--line);
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.vmodal-counter:hover {
+  color: var(--ink);
+  border-color: var(--accent);
+  background: rgba(94, 234, 212, 0.05);
+}
+.vmodal-counter strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
 /* ---------- "Now what?" — rings of contribution ---------- */
 .rings-wrap {
   display: grid;

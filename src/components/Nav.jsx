@@ -3,6 +3,7 @@ const LINKS = [
   ['waves', 'Three waves'],
   ['simulator', 'Simulator'],
   ['sectors', 'The jobs'],
+  ['alarmist', 'Alarmist?'],
   ['society', 'Society'],
   ['meaning', 'Now what?'],
   ['voices', 'The chorus'],
