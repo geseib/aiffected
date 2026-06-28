@@ -1,4 +1,5 @@
 import { Reveal } from './Charts.jsx';
+import { AUTHOR, AUTHOR_NOTE } from '../author.js';
 
 const DIALS = [
   {
@@ -48,11 +49,26 @@ export default function Closing() {
         </a>
       </Reveal>
 
+      <Reveal className="author-note">
+        <p className="author-note-text">“{AUTHOR_NOTE}”</p>
+        <p className="author-sign">
+          — {AUTHOR.name}
+          {AUTHOR.linkedin && (
+            <>
+              {' · '}
+              <a href={AUTHOR.linkedin} target="_blank" rel="noopener noreferrer">
+                connect on LinkedIn ↗
+              </a>
+            </>
+          )}
+        </p>
+      </Reveal>
+
       <footer className="foot">
         <p>
-          <strong>aiffected</strong> — an interactive explainer. The model is intentionally simplified to
-          make the mechanics visible; it is not a forecast, and the sector figures are illustrative.
-          Built to start a conversation, not to end one.
+          <strong>aiffected</strong> — a personal essay by {AUTHOR.name}. The model is intentionally
+          simplified to make the mechanics visible; it is not a forecast, and the sector figures are
+          illustrative. Built to start a conversation, not to end one.
         </p>
         <p>
           <a className="foot-share" href={`${import.meta.env.BASE_URL}share/`}>

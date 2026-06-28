@@ -4,6 +4,17 @@ import { Counter, LineChart, SplitBar, Gauge } from './Charts.jsx';
 import Voice from './Voice.jsx';
 import { Glossed } from './Term.jsx';
 import { briefBySlug } from '../briefs.js';
+import { AUTHOR, AUTHOR_NOTE } from '../author.js';
+
+function Byline() {
+  return AUTHOR.linkedin ? (
+    <a href={AUTHOR.linkedin} target="_blank" rel="noopener noreferrer">
+      {AUTHOR.name}
+    </a>
+  ) : (
+    <span>{AUTHOR.name}</span>
+  );
+}
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -255,9 +266,15 @@ export default function Brief({ slug, og = false }) {
           </div>
         )}
         {!og && (
-          <a className="brief-cta hero-cta" href={`${BASE}#${b.deep}`}>
-            {b.cta}
-          </a>
+          <span className="brief-cta-wrap">
+            <a className="brief-cta hero-cta" href={`${BASE}#${b.deep}`}>
+              {b.cta}
+            </a>
+            <span className="brief-cta-note" role="tooltip">
+              “{AUTHOR_NOTE}”
+              <span className="brief-cta-sign">— {AUTHOR.first}</span>
+            </span>
+          </span>
         )}
       </div>
       {!og && (
@@ -266,7 +283,7 @@ export default function Brief({ slug, og = false }) {
           <a href={BASE}>
             <span className="brand-mark">ai</span>ffected
           </a>{' '}
-          — an interactive explainer on how GenAI could remake work, income and society.
+          — a personal essay by <Byline /> on how GenAI could remake work, income and society.
         </p>
       )}
       {og && (
