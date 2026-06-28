@@ -1,4 +1,5 @@
 import { LineChart } from './Charts.jsx';
+import Voice from './Voice.jsx';
 import { compute, PRESETS } from '../model.js';
 
 export default function Hero() {
@@ -15,11 +16,11 @@ export default function Hero() {
           while <em className="down">1 in 5</em> people lose their jobs.
         </h1>
         <p className="hero-sub">
-          That isn't a contradiction. It's arithmetic. Generative AI is about to pull apart two things
-          we've always assumed move together — <strong>how much an economy produces</strong> and{' '}
-          <strong>how many people it needs</strong>. This page walks you through how that happens, lets
-          you build the scenarios yourself, and asks the question underneath all of it:{' '}
-          <em>if we don't need everyone to work, how should a society be organized?</em>
+          Not a contradiction. Arithmetic. Generative AI is prying apart two things we always assumed
+          moved together: <strong>what an economy produces</strong> and{' '}
+          <strong>how many people it needs to produce it</strong>. Output keeps climbing. The paychecks
+          don't. <Voice id="amodei" /> What's left is the question we keep dodging —{' '}
+          <em>if the economy no longer needs everyone to work, who is it for?</em>
         </p>
 
         <div className="hero-charts">

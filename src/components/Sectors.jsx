@@ -1,5 +1,6 @@
 import { Reveal } from './Charts.jsx';
 import WaveToggle from './WaveToggle.jsx';
+import Voice from './Voice.jsx';
 
 // Illustrative task-exposure by sector, per wave: the share of a sector's tasks
 // that AI (wave 1), robotics (wave 2) and autonomous systems (wave 3) can
@@ -72,8 +73,8 @@ export default function Sectors({ wave, setWave }) {
       <p className="sectors-foot">
         <span className="sector-legend"><i className="sector-kind mind" /> cognitive&nbsp;work</span>
         <span className="sector-legend"><i className="sector-kind body" /> physical&nbsp;work</span>
-        &nbsp;· Share of tasks each wave can do or heavily assist (illustrative). Exposure isn't job
-        loss — it's the size of the lever. What it becomes is set by the choices in the simulator above.
+        &nbsp;· Share of tasks each wave can do or heavily assist (illustrative). <Voice id="frey" />{' '}
+        Exposure isn't job loss — it's the size of the lever. What it becomes is set in the simulator above.
       </p>
     </section>
   );

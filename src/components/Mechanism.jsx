@@ -1,29 +1,31 @@
 import { Reveal } from './Charts.jsx';
+import Voice from './Voice.jsx';
 
 const STEPS = [
   {
     n: '01',
     title: 'GDP counts output, not people',
     body:
-      "Gross Domestic Product is the value of everything produced — goods, services, software, answers. It has never measured how many humans were involved. A factory that makes the same cars with a tenth of the workers produces the same GDP. The paycheck disappears; the output doesn't.",
+      'GDP measures what gets made — cars, code, answers — and never how many people made it. A factory that builds the same cars with a tenth of the workers posts the same GDP. The output stays. The paychecks vanish.',
   },
   {
     n: '02',
-    title: 'A task is where the wage and the work meet',
+    title: 'A job is just a bundle of tasks',
     body:
-      'Most jobs are bundles of tasks. For two centuries, doing a task and paying a person were the same act — the only way to get the task done was to hire someone. Automation quietly breaks that link, one task at a time, until enough of a job is gone that the role is gone.',
+      'For two centuries, doing a task and paying a person were the same act — the only way to get it done was to hire someone. Automation cuts that link one task at a time, until enough of a job is gone that the job is gone too.',
   },
   {
     n: '03',
-    title: 'AI automates cognition, not just muscle',
+    title: 'This time it comes for the thinking',
     body:
-      'Earlier machines replaced physical labour and pushed people up into thinking work. Generative AI reaches into that thinking work itself — drafting, coding, analyzing, supporting, designing. There is no obvious higher rung to climb to, and the same model that does one office task can do thousands.',
+      'Every earlier machine replaced muscle and pushed people up into knowledge work. Generative AI comes for the knowledge work itself — drafting, coding, analyzing, advising. There is no higher rung left to climb to, and the model that does one white-collar task can do a million.',
+    voice: 'keynes',
   },
   {
     n: '04',
-    title: 'So output and employment come apart',
+    title: 'So output and jobs come apart',
     body:
-      'Put it together: production keeps rising because the machines are cheap and tireless, while the wages that used to ride along with that production simply stop being paid. GDP up, jobs down — not despite each other, but through the very same mechanism.',
+      'Put it together. Production keeps rising because the machines are cheap, fast and tireless. The wages that used to ride along with it simply stop. GDP up, jobs down — not in spite of each other, but by the very same move.',
   },
 ];
 
@@ -34,8 +36,13 @@ export default function Mechanism() {
         <p className="eyebrow">The mechanism</p>
         <h2>How does an economy grow while shedding workers?</h2>
         <p className="lede">
-          The instinct is that a booming economy must be hiring. That instinct comes from a world where
-          output could only grow by adding human effort. Four steps break that assumption.
+          A booming economy hires — that's the instinct, and it comes from a world where the only way to
+          make more was to employ more. <Voice id="brynjolfsson" /> AI breaks that rule. Here's how, in
+          four steps.
+        </p>
+        <p className="voice-hint">
+          <b>❝</b> The chips scattered through this page are real arguments — from economists, builders
+          and critics. Hover or tap to read them; every link goes to the source.
         </p>
       </div>
 
@@ -45,7 +52,9 @@ export default function Mechanism() {
             <div className="step-n">{s.n}</div>
             <div className="step-body">
               <h3>{s.title}</h3>
-              <p>{s.body}</p>
+              <p>
+                {s.body} {s.voice && <Voice id={s.voice} />}
+              </p>
             </div>
           </Reveal>
         ))}
@@ -54,8 +63,8 @@ export default function Mechanism() {
       <Reveal className="task-demo">
         <h3 className="task-demo-title">One job, task by task</h3>
         <p className="task-demo-sub">
-          A role disappears gradually, not all at once. Each automated task keeps producing value —
-          it just stops producing a paycheck.
+          A role doesn't vanish overnight. It hollows out — each automated task still produces value, it
+          just stops producing a paycheck. <Voice id="graeber" />
         </p>
         <div className="tasks">
           {TASK_TILES.map((t) => (
@@ -67,8 +76,8 @@ export default function Mechanism() {
           ))}
         </div>
         <p className="task-demo-foot">
-          Output is unchanged or higher. The wage bill for this role has fallen by two-thirds — and GDP
-          never noticed.
+          Same output, or more. The wage bill for this job just fell by two-thirds — and GDP never
+          flinched.
         </p>
       </Reveal>
     </section>

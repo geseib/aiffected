@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { compute, leversFor, PRESETS, firstPreset, WAVE_CFG } from '../model.js';
 import { LineChart, SplitBar, Gauge, Counter } from './Charts.jsx';
 import WaveToggle from './WaveToggle.jsx';
+import Voice from './Voice.jsx';
 
 export default function Simulator({ wave, setWave }) {
   const [active, setActive] = useState(firstPreset(wave).id);
@@ -38,9 +39,9 @@ export default function Simulator({ wave, setWave }) {
           <p className="eyebrow">The simulator</p>
           <h2>Build an economy. Watch who it leaves behind.</h2>
           <p className="lede">
-            Pick a wave, pick a scenario, then drag the levers. The same engine drives every number —
-            output, jobs, who pockets the gains, and what's left for a typical household. Each wave
-            reaches deeper into the economy than the last.
+            Pick a wave, pick a scenario, drag the levers. One engine drives every number — output,
+            jobs, who pockets the gains, what's left for a typical household. <Voice id="acemoglu" />{' '}
+            None of it is fixed. That's the whole point.
           </p>
           <WaveToggle wave={wave} setWave={setWave} />
         </header>
