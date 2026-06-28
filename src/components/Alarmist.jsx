@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Voice from './Voice.jsx';
+import { Glossed } from './Term.jsx';
 import { Reveal } from './Charts.jsx';
 
 const STANCES = [
@@ -73,7 +74,9 @@ export default function Alarmist() {
           <h4>The case that it’s not alarmist</h4>
           <ul>
             {OPTIMIST.map((o, i) => (
-              <li key={i}>{o}</li>
+              <li key={i}>
+                <Glossed text={o} />
+              </li>
             ))}
           </ul>
           <p className="alarmist-voices">
@@ -84,7 +87,9 @@ export default function Alarmist() {
           <h4>Why this time might be different</h4>
           <ul>
             {SKEPTIC.map((o, i) => (
-              <li key={i}>{o}</li>
+              <li key={i}>
+                <Glossed text={o} />
+              </li>
             ))}
           </ul>
         </Reveal>

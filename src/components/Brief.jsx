@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { compute } from '../model.js';
 import { Counter, LineChart, SplitBar, Gauge } from './Charts.jsx';
 import Voice from './Voice.jsx';
+import { Glossed } from './Term.jsx';
 import { briefBySlug } from '../briefs.js';
 
 const BASE = import.meta.env.BASE_URL;
@@ -240,7 +241,7 @@ export default function Brief({ slug, og = false }) {
         <p className="eyebrow">{b.eyebrow}</p>
         <h1 className="brief-title">{renderTitle(b.title)}</h1>
         <p className="brief-dek">
-          {b.dek} {!og && b.voice && <Voice id={b.voice} />}
+          {og ? b.dek : <Glossed text={b.dek} />} {!og && b.voice && <Voice id={b.voice} />}
         </p>
         <div className="brief-visual">
           <Visual kind={b.kind} />
@@ -248,7 +249,9 @@ export default function Brief({ slug, og = false }) {
         {!og && b.question && (
           <div className="brief-question">
             <span className="brief-q-label">⇄ Crying wolf?</span>
-            <p>{b.question}</p>
+            <p>
+              <Glossed text={b.question} />
+            </p>
           </div>
         )}
         {!og && (

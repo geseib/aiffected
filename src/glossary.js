@@ -13,4 +13,24 @@ export const TERMS = {
     term: 'wages vs. capital',
     def: 'How income splits between labour (wages paid to workers) and capital (profit, dividends and rent paid to owners). Automation tends to shift the split toward capital.',
   },
+  machineage: {
+    term: 'machine age',
+    match: ['machine ages', 'machine age'],
+    def: 'An earlier era of automation — steam and the factory, electricity and the assembly line, then the computer. Each was expected to end work, and instead reshaped it.',
+  },
+  lumpoflabour: {
+    term: 'lump of labour',
+    match: ['lump of labour', 'lump of labor'],
+    def: 'The “lump of labour” fallacy: the mistaken belief that an economy holds a fixed amount of work, so any job a machine takes is a job lost forever. In practice, new work keeps appearing.',
+  },
+  productivity: {
+    term: 'productivity',
+    def: 'How much output each hour of work produces. Rising productivity can mean higher wages — or the same output from fewer workers.',
+  },
+  ubi: {
+    term: 'universal basic income',
+    match: ['universal basic income', 'universal income', 'basic income'],
+    def: 'A regular cash payment to everyone, with no conditions, whether or not they work.',
+  },
 };
+
