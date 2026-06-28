@@ -27,6 +27,7 @@ export const VOICES = {
     short: 'Andreessen',
     camp: 'builder',
     pos: 5,
+    counter: 'acemoglu',
     quote: 'AI is quite possibly the most important — and best — thing our civilization has ever created.',
     preview: 'Quite possibly the most important — and best — thing our civilization has ever created.',
     context:
@@ -56,6 +57,7 @@ export const VOICES = {
     short: 'Brynjolfsson',
     camp: 'economist',
     pos: 44,
+    counter: 'autor',
     quote:
       "There's no economic law that says that when technology advances, everybody necessarily benefits. Some people, even a majority of people, could be made worse off.",
     preview: 'No economic law says everybody benefits when technology advances — most people could be made worse off.',
@@ -70,6 +72,7 @@ export const VOICES = {
     short: 'Keynes',
     camp: 'economist',
     pos: 50,
+    counter: 'autor',
     quote:
       'We are being afflicted with a new disease… technological unemployment — due to our discovery of means of economising the use of labour outrunning the pace at which we can find new uses for labour.',
     preview: 'A new disease: technological unemployment.',
@@ -104,6 +107,7 @@ export const VOICES = {
     short: 'Sinek',
     camp: 'purpose',
     pos: 52,
+    counter: 'graeber',
     quote:
       "Working hard for something we don't care about is called stress. Working hard for something we love is called passion.",
     preview: "Work we don't care about is stress; work we love is passion.",
@@ -132,6 +136,7 @@ export const VOICES = {
     short: 'Acemoglu & Johnson',
     camp: 'economist',
     pos: 72,
+    counter: 'andreessen',
     quote:
       'There is nothing automatic about new technologies bringing widespread prosperity. Whether they do or not is an economic, social, and political choice.',
     preview: 'Nothing automatic about new technology bringing prosperity — whether it does is a choice.',
@@ -146,6 +151,7 @@ export const VOICES = {
     short: 'Piketty',
     camp: 'economist',
     pos: 80,
+    counter: 'mccloskey',
     quote:
       'When the rate of return on capital exceeds the rate of growth of output, capitalism automatically generates arbitrary and unsustainable inequalities.',
     preview: 'When returns on capital outrun growth, inequality compounds on its own.',
@@ -163,6 +169,7 @@ export const VOICES = {
     short: 'Graeber',
     camp: 'critic',
     pos: 76,
+    counter: 'sinek',
     quote:
       'Huge swathes of people spend their entire working lives performing tasks they secretly believe do not really need to be performed.',
     preview: "People spend their working lives on tasks they secretly believe needn't exist.",
@@ -195,6 +202,7 @@ export const VOICES = {
     short: 'Bregman',
     camp: 'civic',
     pos: 90,
+    counter: 'cass',
     quote: 'Poverty isn’t a lack of character. It’s a lack of cash.',
     preview: 'Poverty isn’t a lack of character; it’s a lack of cash.',
     context:
@@ -289,6 +297,38 @@ export const VOICES = {
     context:
       'The direct rebuttal to the Frey & Osborne 47% figure: most jobs are bundles of tasks, only some of which automate, so whole occupations rarely vanish outright.',
     source: { label: 'OECD (Arntz, Gregory & Zierahn, 2016)', url: 'https://www.oecd-ilibrary.org/employment/the-risk-of-automation-for-jobs-in-oecd-countries_5jlz9h56dvq7-en' },
+  },
+  mccloskey: {
+    name: 'Deirdre McCloskey',
+    role: 'Economist & historian',
+    monogram: 'DM',
+    short: 'McCloskey',
+    camp: 'economist',
+    pos: 16,
+    verbatim: false,
+    counter: 'piketty',
+    quote:
+      'What matters ethically is that the poor have a roof and enough to eat — not whether the rich have more. The Great Enrichment lifted the poor by thousands of percent; that, not inequality, is the real story.',
+    preview: 'The real story isn’t the gap — it’s the Great Enrichment that lifted the poor by thousands of percent.',
+    context:
+      'The best-known critic of Piketty: fixating on the gap between rich and poor distracts from the explosion of growth that made even the poorest vastly better off. Inequality, she argues, is the wrong thing to fear.',
+    source: { label: 'Deirdre McCloskey — review of Piketty (2014)', url: 'https://en.wikipedia.org/wiki/Deirdre_McCloskey' },
+  },
+  cass: {
+    name: 'Oren Cass',
+    role: 'Author, “The Once and Future Worker”',
+    monogram: 'OC',
+    short: 'Cass',
+    camp: 'civic',
+    pos: 58,
+    verbatim: false,
+    counter: 'bregman',
+    quote:
+      'A job is not just a paycheck. Work is how people contribute to their communities and earn a place in them — which is exactly what an unconditional cheque can’t provide.',
+    preview: 'A job is not just a paycheck — it’s how people earn a place in their community.',
+    context:
+      'The case against simply paying people: hand out income with no link to contribution and you may end poverty on paper while hollowing out the dignity and belonging that work provides.',
+    source: { label: 'Oren Cass — “The Once and Future Worker” (2018)', url: 'https://en.wikipedia.org/wiki/Oren_Cass' },
   },
 };
 

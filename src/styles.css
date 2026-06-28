@@ -1883,6 +1883,143 @@ input[type='range']::-moz-range-thumb {
   }
 }
 
+/* counter-view icon + interactive popover */
+.voice-outer {
+  display: inline;
+  white-space: nowrap;
+}
+.voice-counter {
+  position: relative;
+  display: inline-block;
+  margin-left: 0.12em;
+}
+.voice-counter-btn {
+  --vc: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35em;
+  height: 1.35em;
+  padding: 0;
+  border-radius: 5px;
+  border: 1px solid color-mix(in srgb, var(--vc) 45%, transparent);
+  background: color-mix(in srgb, var(--vc) 8%, transparent);
+  color: var(--vc);
+  font-size: 0.82em;
+  line-height: 1;
+  cursor: pointer;
+  vertical-align: baseline;
+  transition: background 0.18s, transform 0.12s;
+}
+.voice-counter-btn:hover {
+  background: color-mix(in srgb, var(--vc) 22%, transparent);
+  transform: translateY(-1px);
+}
+.voice-counter-btn.camp-builder {
+  --vc: #5eead4;
+}
+.voice-counter-btn.camp-economist {
+  --vc: #fbbf24;
+}
+.voice-counter-btn.camp-critic {
+  --vc: #fb7185;
+}
+.voice-counter-btn.camp-civic {
+  --vc: #60a5fa;
+}
+.voice-counter-btn.camp-purpose {
+  --vc: #c084fc;
+}
+.voice-counter-pop {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  width: max-content;
+  max-width: 290px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.85rem 0.95rem;
+  background: #0b1119;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.85);
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s, transform 0.18s;
+  z-index: 45;
+}
+/* hover-bridge so the pointer can travel from icon to popover without it closing */
+.voice-counter-pop::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+.voice-counter:hover .voice-counter-pop,
+.voice-counter:focus-within .voice-counter-pop {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.vc-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+.vc-name {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ink);
+}
+.vc-role {
+  font-size: 0.74rem;
+  color: var(--faint);
+  margin-top: -0.2rem;
+}
+.vc-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-top: 0.15rem;
+}
+.vc-quote::before {
+  content: '“';
+}
+.vc-quote::after {
+  content: '”';
+}
+.vc-quote.para::before,
+.vc-quote.para::after {
+  content: '';
+}
+.vc-source {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--accent);
+  text-decoration: none;
+  margin-top: 0.2rem;
+}
+.vc-source:hover {
+  text-decoration: underline;
+}
+@media (hover: none) {
+  .voice-counter-pop {
+    display: none;
+  }
+}
+
 /* the modal */
 .vmodal-back {
   position: fixed;
