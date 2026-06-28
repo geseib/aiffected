@@ -705,6 +705,321 @@ input[type='range']::-moz-range-thumb {
   color: var(--accent);
   font-weight: 700;
 }
+/* ---------- Social-contract board ---------- */
+.sc-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 1.4rem;
+  align-items: start;
+}
+.sc-board {
+  display: grid;
+  gap: 1rem;
+}
+.sc-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.4rem 1.5rem;
+  transition: border-color 0.3s;
+}
+.sc-card.answered {
+  border-color: rgba(94, 234, 212, 0.3);
+}
+.sc-eyebrow {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.66rem;
+  color: var(--accent);
+  margin: 0 0 0.5rem;
+}
+.sc-q {
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
+}
+.sc-context {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin: 0 0 1.1rem;
+}
+.sc-opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.sc-opt {
+  flex: 1 1 auto;
+  min-width: 150px;
+  text-align: left;
+  padding: 0.7rem 0.9rem;
+  border-radius: 11px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.12s;
+}
+.sc-opt:hover {
+  border-color: rgba(94, 234, 212, 0.45);
+  transform: translateY(-1px);
+}
+.sc-opt.on {
+  border-color: var(--accent);
+  background: rgba(94, 234, 212, 0.12);
+  color: #fff;
+}
+.sc-voices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-top: 1.1rem;
+  animation: voicesIn 0.45s ease;
+}
+@keyframes voicesIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.sc-voice {
+  border-radius: 11px;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+}
+.sc-voice p {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.sc-voice.ally {
+  background: rgba(52, 211, 153, 0.07);
+  border-color: rgba(52, 211, 153, 0.25);
+}
+.sc-voice.challenge {
+  background: rgba(248, 113, 113, 0.07);
+  border-color: rgba(248, 113, 113, 0.25);
+}
+.sc-voice-tag {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+.sc-voice.ally .sc-voice-tag {
+  color: var(--up);
+}
+.sc-voice.challenge .sc-voice-tag {
+  color: var(--down);
+}
+
+/* synthesis aside */
+.sc-aside {
+  position: sticky;
+  top: 76px;
+}
+.sc-panel {
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.5rem;
+}
+.sc-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+.sc-panel-head .panel-title {
+  margin: 0;
+  font-size: 1.15rem;
+}
+.sc-count {
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+.sc-compass {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 1rem;
+}
+.sc-comp-bg {
+  fill: rgba(0, 0, 0, 0.25);
+  stroke: var(--line);
+}
+.sc-quad {
+  opacity: 0.5;
+}
+.q-private {
+  fill: rgba(96, 165, 250, 0.06);
+}
+.q-commons {
+  fill: rgba(94, 234, 212, 0.08);
+}
+.q-frontier {
+  fill: rgba(248, 113, 113, 0.06);
+}
+.q-republic {
+  fill: rgba(192, 132, 252, 0.06);
+}
+.sc-axis {
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.sc-quad-label {
+  fill: var(--muted);
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 600;
+}
+.sc-axis-end {
+  fill: var(--faint);
+  font-family: var(--mono);
+  font-size: 8.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.sc-vert {
+  writing-mode: vertical-rl;
+}
+.sc-dot-g {
+  transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.sc-dot {
+  fill: #fff;
+}
+.sc-dot-halo {
+  fill: var(--accent);
+  opacity: 0.4;
+}
+.sc-hint {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin: 0;
+}
+.sc-archetype {
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+.sc-arch-tag {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin: 0 0 0.25rem;
+}
+.sc-arch-name {
+  font-size: 1.5rem;
+  margin-bottom: 0.55rem;
+}
+.sc-arch-body {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin: 0 0 0.9rem;
+}
+.sc-arch-who {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.84rem;
+  color: var(--ink);
+}
+.sc-arch-who strong {
+  color: var(--faint);
+  font-weight: 600;
+}
+.sc-tensions {
+  margin-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+.sc-tensions-head {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--amber);
+  margin: 0 0 0.6rem;
+}
+.sc-tension {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.5;
+  padding: 0.6rem 0.8rem;
+  background: rgba(251, 191, 36, 0.06);
+  border-left: 2px solid rgba(251, 191, 36, 0.5);
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 0.5rem;
+}
+.sc-tension strong {
+  color: var(--ink);
+}
+.sc-reflect {
+  margin-top: 1.1rem;
+  padding: 1rem 1.1rem;
+  background: rgba(94, 234, 212, 0.07);
+  border-radius: 12px;
+}
+.sc-reflect span {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+.sc-reflect p {
+  margin: 0.35rem 0 0;
+  font-family: var(--serif);
+  font-size: 1.12rem;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.35;
+}
+.sc-reset {
+  margin-top: 1.2rem;
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.sc-reset:hover {
+  color: var(--ink);
+  border-color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .sc-grid {
+    grid-template-columns: 1fr;
+  }
+  .sc-aside {
+    position: static;
+  }
+}
+@media (max-width: 480px) {
+  .sc-voices {
+    grid-template-columns: 1fr;
+  }
+}
+
 .society-note {
   margin-top: 2rem;
   padding: 1.6rem 1.8rem;
