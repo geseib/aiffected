@@ -1,25 +1,35 @@
-import { useMemo, useState } from 'react';
-import { compute, LEVERS, PRESETS, DEFAULT_PRESET } from '../model.js';
+import { useEffect, useMemo, useState } from 'react';
+import { compute, leversFor, PRESETS, firstPreset, WAVE_CFG } from '../model.js';
 import { LineChart, SplitBar, Gauge, Counter } from './Charts.jsx';
+import WaveToggle from './WaveToggle.jsx';
 
-const presetLevers = (id) => PRESETS.find((p) => p.id === id).levers;
+export default function Simulator({ wave, setWave }) {
+  const [active, setActive] = useState(firstPreset(wave).id);
+  const [levers, setLevers] = useState(firstPreset(wave).levers);
 
-export default function Simulator() {
-  const [active, setActive] = useState(DEFAULT_PRESET);
-  const [levers, setLevers] = useState(presetLevers(DEFAULT_PRESET));
+  // Switching wave drops the reader onto that wave's first preset.
+  useEffect(() => {
+    const p = firstPreset(wave);
+    setActive(p.id);
+    setLevers(p.levers);
+  }, [wave]);
 
-  const r = useMemo(() => compute(levers), [levers]);
+  const r = useMemo(() => compute({ ...levers, wave }), [levers, wave]);
+  const cfg = WAVE_CFG[wave];
+  const presets = PRESETS[wave];
+  const levs = leversFor(wave);
 
-  const choose = (id) => {
-    setActive(id);
-    setLevers(presetLevers(id));
+  const choose = (p) => {
+    setActive(p.id);
+    setLevers(p.levers);
   };
   const drag = (key, val) => {
-    setActive(null); // now it's a custom mix
+    setActive(null);
     setLevers((l) => ({ ...l, [key]: Number(val) }));
   };
 
   const gdpUp = r.gdpGrowth >= 0;
+  const isW3 = wave === 3;
 
   return (
     <section className="sim" id="simulator">
@@ -28,20 +38,21 @@ export default function Simulator() {
           <p className="eyebrow">The simulator</p>
           <h2>Build an economy. Watch who it leaves behind.</h2>
           <p className="lede">
-            Pick a scenario, then drag the levers. The same engine drives every number — output, jobs,
-            who pockets the gains, and what's left for a typical household. Notice how easily the green
-            line and the red line pull apart.
+            Pick a wave, pick a scenario, then drag the levers. The same engine drives every number —
+            output, jobs, who pockets the gains, and what's left for a typical household. Each wave
+            reaches deeper into the economy than the last.
           </p>
+          <WaveToggle wave={wave} setWave={setWave} />
         </header>
 
         <div className="preset-row" role="tablist" aria-label="Scenarios">
-          {PRESETS.map((p) => (
+          {presets.map((p) => (
             <button
               key={p.id}
               role="tab"
               aria-selected={active === p.id}
               className={`preset ${active === p.id ? 'on' : ''}`}
-              onClick={() => choose(p.id)}
+              onClick={() => choose(p)}
             >
               <span className="preset-name">{p.name}</span>
               <span className="preset-tag">{p.tagline}</span>
@@ -53,18 +64,18 @@ export default function Simulator() {
           {/* Controls */}
           <div className="panel controls">
             <h3 className="panel-title">The levers</h3>
-            {LEVERS.map((lv) => (
+            {levs.map((lv) => (
               <div className="lever" key={lv.key}>
                 <div className="lever-top">
                   <label htmlFor={lv.key}>{lv.label}</label>
-                  <output>{levers[lv.key]}</output>
+                  <output>{levers[lv.key] ?? 50}</output>
                 </div>
                 <input
                   id={lv.key}
                   type="range"
-                  min={lv.min}
-                  max={lv.max}
-                  value={levers[lv.key]}
+                  min={0}
+                  max={100}
+                  value={levers[lv.key] ?? 50}
                   onChange={(e) => drag(lv.key, e.target.value)}
                 />
                 <div className="lever-ends">
@@ -103,7 +114,7 @@ export default function Simulator() {
                 series={r.gdpSeries}
                 color="#34d399"
                 yMin={95}
-                yMax={135}
+                yMax={cfg.gdpYMax}
                 label="GDP (output)"
                 format={(v) => `+${(v - 100).toFixed(0)}%`}
               />
@@ -111,7 +122,7 @@ export default function Simulator() {
                 series={r.unemploymentSeries}
                 color="#f87171"
                 yMin={0}
-                yMax={40}
+                yMax={cfg.unempYMax}
                 label="Unemployment"
                 unit="%"
                 format={(v) => v.toFixed(0)}
@@ -129,7 +140,11 @@ export default function Simulator() {
                   rightColor="#c084fc"
                 />
               </div>
-              <Gauge value={r.stability} label="Social stability" />
+              <Gauge
+                value={isW3 ? r.leverage : r.stability}
+                label={isW3 ? 'Human leverage' : 'Social stability'}
+                words={isW3 ? ['Negligible', 'Contested', 'Held'] : undefined}
+              />
             </div>
 
             <p className="verdict">{verdict(r)}</p>
@@ -137,8 +152,8 @@ export default function Simulator() {
         </div>
         <p className="sim-foot">
           Illustrative model — stylized to show the <em>shape</em> of the trade-offs, not to forecast a
-          specific year. Same inputs always give the same outputs; drag things to extremes and the
-          mechanics still hold.
+          specific year. Same inputs always give the same outputs.
+          {isW3 && ' In Wave 3, “unemployment” stops being the real question — watch human leverage instead.'}
         </p>
       </div>
     </section>
@@ -149,6 +164,15 @@ function verdict(r) {
   const gdp = r.gdpGrowth.toFixed(0);
   const un = r.unemployment.toFixed(0);
   const med = (r.medianIndex - 100).toFixed(0);
+
+  if (r.wave === 3) {
+    if (r.leverage < 35)
+      return `Output is +${gdp}% — and almost none of it needs you. With human leverage this low, the economy can boom while people become economically optional. The fight is no longer over wages; it's over whether humans stay in the loop at all.`;
+    if (r.leverage > 62 && r.medianIndex > 105)
+      return `The good ending of Wave 3: +${gdp}% output, autonomy kept under control, and the abundance actually reaching households (${med >= 0 ? '+' : ''}${med}%). Post-scarcity, on purpose — not by accident.`;
+    return `+${gdp}% output, ${un}% without a traditional job, household income ${med >= 0 ? '+' : ''}${med}%. Whether this is utopia or obsolescence comes down to who keeps control and who shares the windfall.`;
+  }
+
   if (r.unemployment > 15 && r.gdpGrowth > 10 && r.medianIndex < 95) {
     return `The paradox in full: the economy is +${gdp}% bigger, yet ${un}% can't find work and the typical household is ${Math.abs(med)}% poorer. Growth happened — to someone else.`;
   }
@@ -156,7 +180,7 @@ function verdict(r) {
     return `A genuinely good outcome: +${gdp}% output, joblessness held near ${un}%, and the median household shares in the boom (${med >= 0 ? '+' : ''}${med}%). The gains were spread on purpose.`;
   }
   if (r.gdpGrowth > 8 && r.unemployment > 12) {
-    return `Output is up +${gdp}%, but ${un}% are out of work. Whether this is a crisis or a transition depends entirely on what the new jobs and the redistribution levers do next.`;
+    return `Output is up +${gdp}%, but ${un}% are out of work. Whether this is a crisis or a transition depends on what the new jobs and the redistribution levers do next.`;
   }
   return `A measured path: +${gdp}% output with unemployment around ${un}%. Modest changes, modestly shared.`;
 }

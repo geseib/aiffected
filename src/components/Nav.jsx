@@ -1,5 +1,6 @@
 const LINKS = [
   ['mechanism', 'The mechanism'],
+  ['waves', 'Three waves'],
   ['simulator', 'Simulator'],
   ['sectors', 'The jobs'],
   ['society', 'Society'],

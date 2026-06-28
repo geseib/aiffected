@@ -2,8 +2,8 @@ import { LineChart } from './Charts.jsx';
 import { compute, PRESETS } from '../model.js';
 
 export default function Hero() {
-  // Use the headline "jobless boom" scenario as the hero illustration.
-  const r = compute(PRESETS.find((p) => p.id === 'jobless-boom').levers);
+  // Use the headline "jobless boom" scenario (wave 1) as the hero illustration.
+  const r = compute({ ...PRESETS[1].find((p) => p.id === 'jobless-boom').levers, wave: 1 });
 
   return (
     <header className="hero" id="top">

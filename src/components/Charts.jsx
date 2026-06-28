@@ -78,7 +78,7 @@ export function SplitBar({ left, leftLabel, leftColor, rightLabel, rightColor })
 }
 
 // Half-circle gauge for the stability index.
-export function Gauge({ value, label }) {
+export function Gauge({ value, label, words = ['Fragile', 'Strained', 'Stable'] }) {
   const r = 70;
   const cx = 90;
   const cy = 90;
@@ -87,7 +87,7 @@ export function Gauge({ value, label }) {
   const y = cy - r * Math.sin(a);
   const big = value > 50 ? 1 : 0;
   const tone = value > 66 ? '#34d399' : value > 38 ? '#fbbf24' : '#f87171';
-  const word = value > 66 ? 'Stable' : value > 38 ? 'Strained' : 'Fragile';
+  const word = value > 66 ? words[2] : value > 38 ? words[1] : words[0];
   return (
     <div className="gauge">
       <svg viewBox="0 0 180 110" aria-label={`${label}: ${word}`}>

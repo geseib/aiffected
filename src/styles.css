@@ -630,6 +630,22 @@ input[type='range']::-moz-range-thumb {
 .sector-name {
   font-size: 0.95rem;
   color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.sector-kind {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  display: inline-block;
+}
+.sector-kind.mind {
+  background: var(--blue);
+}
+.sector-kind.body {
+  background: var(--purple);
 }
 .sector-bar {
   height: 14px;
@@ -659,6 +675,196 @@ input[type='range']::-moz-range-thumb {
   font-size: 0.86rem;
   color: var(--faint);
   max-width: 72ch;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 0.5rem;
+}
+.sector-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--muted);
+}
+
+/* ---------- Wave toggle ---------- */
+.wavetoggle {
+  display: inline-flex;
+  gap: 0.4rem;
+  margin-top: 1.6rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.4rem;
+  flex-wrap: wrap;
+}
+.wave-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--sans);
+  text-align: left;
+  transition: background 0.2s, border-color 0.2s;
+  min-width: 116px;
+}
+.wave-btn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ink);
+}
+.wave-n {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.8;
+}
+.wave-name {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.wave-sub {
+  font-size: 0.72rem;
+  color: var(--faint);
+}
+.wave-btn.on {
+  background: rgba(255, 255, 255, 0.05);
+}
+.wave-btn.w1.on {
+  border-color: var(--accent);
+}
+.wave-btn.w1.on .wave-n {
+  color: var(--accent);
+  opacity: 1;
+}
+.wave-btn.w2.on {
+  border-color: var(--amber);
+}
+.wave-btn.w2.on .wave-n {
+  color: var(--amber);
+  opacity: 1;
+}
+.wave-btn.w3.on {
+  border-color: #fb7185;
+}
+.wave-btn.w3.on .wave-n {
+  color: #fb7185;
+  opacity: 1;
+}
+.wavetoggle.compact .wave-btn {
+  min-width: auto;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0.45rem 0.9rem;
+}
+
+/* ---------- Three waves section ---------- */
+.waves-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.wave-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--line);
+  border-radius: 18px;
+  padding: 1.6rem;
+}
+.wave-card.w1 {
+  border-top-color: var(--accent);
+}
+.wave-card.w2 {
+  border-top-color: var(--amber);
+}
+.wave-card.w3 {
+  border-top-color: #fb7185;
+}
+.wave-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+.wave-card-n {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+.wave-card.w2 .wave-card-n {
+  color: var(--amber);
+}
+.wave-card.w3 .wave-card-n {
+  color: #fb7185;
+}
+.wave-card-when {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--faint);
+}
+.wave-card h3 {
+  font-size: 1.65rem;
+  margin-bottom: 0.2rem;
+}
+.wave-card-what {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin: 0 0 0.9rem;
+}
+.wave-card-body {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+.wave-card-line {
+  margin: 0;
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 0.98rem;
+  border-left: 3px solid var(--line);
+  padding-left: 0.9rem;
+}
+.wave-card.w1 .wave-card-line {
+  border-left-color: var(--accent);
+}
+.wave-card.w2 .wave-card-line {
+  border-left-color: var(--amber);
+}
+.wave-card.w3 .wave-card-line {
+  border-left-color: #fb7185;
+}
+.waves-foot {
+  margin-top: 2rem;
+  padding: 1.4rem 1.6rem;
+  background: linear-gradient(135deg, rgba(94, 234, 212, 0.06), rgba(251, 113, 133, 0.07));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.waves-foot p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+.waves-foot strong {
+  color: var(--ink);
+}
+@media (max-width: 820px) {
+  .waves-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------- Society ---------- */
