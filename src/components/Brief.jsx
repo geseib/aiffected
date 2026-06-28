@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { compute } from '../model.js';
-import { Counter, LineChart } from './Charts.jsx';
+import { Counter, LineChart, SplitBar, Gauge } from './Charts.jsx';
 import Voice from './Voice.jsx';
 import { briefBySlug } from '../briefs.js';
 
@@ -99,10 +99,132 @@ function Rings() {
   );
 }
 
+function Decoupling() {
+  const w = 360;
+  const h = 180;
+  const pad = 22;
+  const prod = [100, 104, 110, 118, 128, 138, 147, 154, 159, 162, 164];
+  const pay = [100, 101, 102, 103, 104, 105, 106, 107, 107, 108, 108];
+  const yMin = 95;
+  const yMax = 170;
+  const X = (i) => pad + (i / (prod.length - 1)) * (w - pad * 2);
+  const Y = (v) => h - pad - ((v - yMin) / (yMax - yMin)) * (h - pad * 2);
+  const path = (a) => a.map((v, i) => `${i ? 'L' : 'M'} ${X(i).toFixed(1)} ${Y(v).toFixed(1)}`).join(' ');
+  return (
+    <div className="brief-decoupling">
+      <svg viewBox={`0 0 ${w} ${h}`} className="brief-dual" preserveAspectRatio="none" role="img" aria-label="Productivity rising while pay stays flat">
+        <path d={path(prod)} fill="none" stroke="#34d399" strokeWidth="2.5" strokeLinecap="round" />
+        <path d={path(pay)} fill="none" stroke="#f87171" strokeWidth="2.5" strokeLinecap="round" />
+        <circle cx={X(prod.length - 1)} cy={Y(prod[prod.length - 1])} r="4.5" fill="#34d399" />
+        <circle cx={X(pay.length - 1)} cy={Y(pay[pay.length - 1])} r="4.5" fill="#f87171" />
+      </svg>
+      <div className="brief-dual-legend">
+        <span><i style={{ background: '#34d399' }} />Output per worker <strong>+64%</strong></span>
+        <span><i style={{ background: '#f87171' }} />Typical pay <strong>+8%</strong></span>
+      </div>
+    </div>
+  );
+}
+
+const BSECT = [
+  { n: 'Warehouse & logistics', e: [28, 84] },
+  { n: 'Driving & delivery', e: [20, 80] },
+  { n: 'Assembly & manufacturing', e: [32, 83] },
+  { n: 'Cleaning & facilities', e: [16, 74] },
+  { n: 'Skilled trades', e: [14, 56] },
+  { n: 'Hands-on care', e: [22, 48] },
+];
+
+function SectorsMini() {
+  const [w, setW] = useState(1);
+  const tone = (e) => (e >= 65 ? '#f87171' : e >= 45 ? '#fbbf24' : '#34d399');
+  return (
+    <div className="brief-sectorsmini">
+      <div className="wavetoggle compact">
+        <button className={`wave-btn w1 ${w === 1 ? 'on' : ''}`} onClick={() => setW(1)}>
+          <span className="wave-n">Wave 1</span>
+          <span className="wave-name">Cognition</span>
+        </button>
+        <button className={`wave-btn w2 ${w === 2 ? 'on' : ''}`} onClick={() => setW(2)}>
+          <span className="wave-n">Wave 2</span>
+          <span className="wave-name">Robotics</span>
+        </button>
+      </div>
+      <div className="sector-list">
+        {BSECT.map((s) => {
+          const v = s.e[w - 1];
+          return (
+            <div className="sector-row" key={s.n}>
+              <span className="sector-name">{s.n}</span>
+              <div className="sector-bar">
+                <div className="sector-fill" style={{ width: `${v}%`, background: tone(v) }} />
+              </div>
+              <span className="sector-pct">{v}%</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function SplitMini() {
+  const [r, setR] = useState(20);
+  const res = useMemo(() => compute({ adoption: 85, automation: 85, newwork: 15, redistribution: r, wave: 1 }), [r]);
+  return (
+    <div className="brief-split">
+      <SplitBar left={res.laborShare} leftLabel="Wages (workers)" leftColor="#60a5fa" rightLabel="Capital (owners)" rightColor="#c084fc" />
+      <div className="brief-slider">
+        <span>Market keeps it</span>
+        <input type="range" min="0" max="100" value={r} onChange={(e) => setR(+e.target.value)} aria-label="Redistribution" />
+        <span>Broadly shared</span>
+      </div>
+    </div>
+  );
+}
+
+function GaugeMini() {
+  const [a, setA] = useState(85);
+  const res = useMemo(() => compute({ adoption: 95, automation: 90, newwork: 15, redistribution: 25, autonomy: a, control: 30, wave: 3 }), [a]);
+  return (
+    <div className="brief-gaugemini">
+      <Gauge value={res.leverage} label="Human leverage" words={['Negligible', 'Contested', 'Held']} />
+      <div className="brief-slider">
+        <span>Tools we direct</span>
+        <input type="range" min="0" max="100" value={a} onChange={(e) => setA(+e.target.value)} aria-label="Autonomy" />
+        <span>Self-directing</span>
+      </div>
+    </div>
+  );
+}
+
+function DebateMini() {
+  return (
+    <div className="brief-debate">
+      <div className="brief-debate-card no">
+        <span className="brief-debate-tag">The alarm</span>
+        <strong>47%</strong>
+        <span>of US jobs “at risk” — Frey &amp; Osborne</span>
+      </div>
+      <div className="brief-debate-vs">vs</div>
+      <div className="brief-debate-card yes">
+        <span className="brief-debate-tag">The rebuttal</span>
+        <strong>~9%</strong>
+        <span>at high risk, measured task-by-task — OECD</span>
+      </div>
+    </div>
+  );
+}
+
 function Visual({ kind }) {
   if (kind === 'paradox') return <Paradox />;
   if (kind === 'ledger') return <Ledger />;
   if (kind === 'rings') return <Rings />;
+  if (kind === 'decoupling') return <Decoupling />;
+  if (kind === 'sectors') return <SectorsMini />;
+  if (kind === 'split') return <SplitMini />;
+  if (kind === 'gauge') return <GaugeMini />;
+  if (kind === 'debate') return <DebateMini />;
   return null;
 }
 

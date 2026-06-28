@@ -46,6 +46,81 @@
       "source": "/now-what",
       "destination": "/b/now-what/",
       "permanent": false
+    },
+    {
+      "source": "/brief4",
+      "destination": "/b/the-great-decoupling/",
+      "permanent": false
+    },
+    {
+      "source": "/brief4/",
+      "destination": "/b/the-great-decoupling/",
+      "permanent": false
+    },
+    {
+      "source": "/the-great-decoupling",
+      "destination": "/b/the-great-decoupling/",
+      "permanent": false
+    },
+    {
+      "source": "/brief5",
+      "destination": "/b/escape-route-closes/",
+      "permanent": false
+    },
+    {
+      "source": "/brief5/",
+      "destination": "/b/escape-route-closes/",
+      "permanent": false
+    },
+    {
+      "source": "/escape-route-closes",
+      "destination": "/b/escape-route-closes/",
+      "permanent": false
+    },
+    {
+      "source": "/brief6",
+      "destination": "/b/who-gets-the-gains/",
+      "permanent": false
+    },
+    {
+      "source": "/brief6/",
+      "destination": "/b/who-gets-the-gains/",
+      "permanent": false
+    },
+    {
+      "source": "/who-gets-the-gains",
+      "destination": "/b/who-gets-the-gains/",
+      "permanent": false
+    },
+    {
+      "source": "/brief7",
+      "destination": "/b/still-in-the-loop/",
+      "permanent": false
+    },
+    {
+      "source": "/brief7/",
+      "destination": "/b/still-in-the-loop/",
+      "permanent": false
+    },
+    {
+      "source": "/still-in-the-loop",
+      "destination": "/b/still-in-the-loop/",
+      "permanent": false
+    },
+    {
+      "source": "/brief8",
+      "destination": "/b/is-it-alarmist/",
+      "permanent": false
+    },
+    {
+      "source": "/brief8/",
+      "destination": "/b/is-it-alarmist/",
+      "permanent": false
+    },
+    {
+      "source": "/is-it-alarmist",
+      "destination": "/b/is-it-alarmist/",
+      "permanent": false
     }
   ]
 }

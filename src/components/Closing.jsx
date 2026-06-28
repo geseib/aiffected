@@ -54,6 +54,11 @@ export default function Closing() {
           make the mechanics visible; it is not a forecast, and the sector figures are illustrative.
           Built to start a conversation, not to end one.
         </p>
+        <p>
+          <a className="foot-share" href={`${import.meta.env.BASE_URL}share/`}>
+            ↗ Share kit — grab links to this page and every brief
+          </a>
+        </p>
       </footer>
     </section>
   );

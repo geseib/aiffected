@@ -2492,6 +2492,247 @@ input[type='range']::-moz-range-thumb {
   border-radius: 50%;
 }
 
+/* brief: decoupling dual-line */
+.brief-dual {
+  width: 100%;
+  height: 170px;
+  display: block;
+}
+.brief-dual-legend {
+  display: flex;
+  gap: 1.6rem;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
+}
+.brief-dual-legend span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.brief-dual-legend i {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+.brief-dual-legend strong {
+  color: var(--ink);
+  font-family: var(--mono);
+}
+
+/* brief: sectors mini */
+.brief-sectorsmini .wavetoggle {
+  margin: 0 0 1.1rem;
+}
+.brief-sectorsmini .sector-list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+/* brief: split + gauge */
+.brief-split,
+.brief-gaugemini {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.brief-gaugemini {
+  align-items: center;
+}
+
+/* brief: debate */
+.brief-debate {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.brief-debate-card {
+  flex: 1 1 200px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.3rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.brief-debate-card.no {
+  border-top: 3px solid var(--down);
+}
+.brief-debate-card.yes {
+  border-top: 3px solid var(--up);
+}
+.brief-debate-tag {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.brief-debate-card strong {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 2.4rem;
+  line-height: 1;
+}
+.brief-debate-card.no strong {
+  color: var(--down);
+}
+.brief-debate-card.yes strong {
+  color: var(--up);
+}
+.brief-debate-card span:last-child {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.brief-debate-vs {
+  align-self: center;
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--faint);
+}
+.foot-share {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.foot-share:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Share kit ---------- */
+.sharehub {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: clamp(1.6rem, 5vw, 3rem);
+}
+.sharehub-head {
+  margin-bottom: 2rem;
+}
+.sharehub-head .brief-brand {
+  display: inline-block;
+  margin-bottom: 1.6rem;
+}
+.sharehub-head h1 {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 0.7rem;
+}
+.sharehub-lede {
+  color: var(--muted);
+  font-size: 1.1rem;
+  max-width: 60ch;
+}
+.share-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.1rem;
+  margin-top: 1.1rem;
+}
+.share-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.share-card-full {
+  margin-bottom: 1.1rem;
+  border-color: rgba(94, 234, 212, 0.35);
+}
+.share-thumb {
+  display: block;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.share-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+  transition: opacity 0.2s;
+}
+.share-thumb:hover img {
+  opacity: 0.85;
+}
+.share-card-body {
+  padding: 1.2rem 1.3rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+.share-kicker {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+.share-card-body h3 {
+  font-size: 1.12rem;
+  line-height: 1.25;
+}
+.share-card-body p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+  flex: 1;
+}
+.share-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.7rem;
+  flex-wrap: wrap;
+}
+.share-actions code {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+.share-copy {
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: rgba(94, 234, 212, 0.1);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.share-copy:hover {
+  background: rgba(94, 234, 212, 0.2);
+}
+.share-actions a {
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+.share-actions a:hover {
+  color: var(--ink);
+}
+.sharehub-foot {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: var(--faint);
+}
+.sharehub-foot code {
+  font-family: var(--mono);
+  color: var(--muted);
+}
+
 /* OG card mode: fixed 1200x630 share image layout */
 .brief-og {
   width: 1200px;
