@@ -3,7 +3,7 @@
 export const AUTHOR = {
   name: 'George Seib',
   first: 'George',
-  linkedin: '', // e.g. 'https://www.linkedin.com/in/<handle>/'
+  linkedin: 'https://www.linkedin.com/in/geseib/',
 };
 
 // George's personal note — shown as the author's note on the page and on hover
