@@ -245,6 +245,12 @@ export default function Brief({ slug, og = false }) {
         <div className="brief-visual">
           <Visual kind={b.kind} />
         </div>
+        {!og && b.question && (
+          <div className="brief-question">
+            <span className="brief-q-label">⇄ Crying wolf?</span>
+            <p>{b.question}</p>
+          </div>
+        )}
         {!og && (
           <a className="brief-cta hero-cta" href={`${BASE}#${b.deep}`}>
             {b.cta}
