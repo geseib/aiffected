@@ -10,7 +10,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 
 // Set SITE_URL to your production origin so og:image/og:url are absolute.
-const SITE = (process.env.SITE_URL || 'https://aiffected.vercel.app').replace(/\/$/, '');
+const SITE = (process.env.SITE_URL || 'https://aiffected.seibtribe.us').replace(/\/$/, '');
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
