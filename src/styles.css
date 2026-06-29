@@ -2955,9 +2955,11 @@ input[type='range']::-moz-range-thumb {
 
 /* ---------- The conversation (danmaku overlay) ---------- */
 .convo {
-  margin-top: 2rem;
+  /* it's a <section>, so reset the global section padding/max-width/centering */
+  max-width: none;
+  margin: 2rem 0 0;
+  padding: 1.6rem 0 0;
   border-top: 1px solid var(--line);
-  padding-top: 1.6rem;
 }
 .convo-h {
   font-size: 1.2rem;
