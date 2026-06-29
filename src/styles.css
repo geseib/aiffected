@@ -2871,6 +2871,345 @@ input[type='range']::-moz-range-thumb {
   color: var(--accent);
 }
 
+/* ---------- Brief poll ---------- */
+.poll {
+  margin: 0.6rem 0 0.2rem;
+}
+.poll-q {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+.poll-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.poll-opt {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-radius: 11px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.12s;
+}
+.poll-opt:not(.done):hover {
+  border-color: rgba(94, 234, 212, 0.45);
+  transform: translateY(-1px);
+}
+.poll-opt.done {
+  cursor: default;
+}
+.poll-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: rgba(94, 234, 212, 0.14);
+  transition: width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 0;
+}
+.poll-opt.mine .poll-fill {
+  background: rgba(94, 234, 212, 0.3);
+}
+.poll-label {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+.poll-pct {
+  position: relative;
+  z-index: 1;
+  font-family: var(--mono);
+  color: var(--muted);
+}
+.poll-opt.mine .poll-pct {
+  color: var(--accent);
+}
+.poll-total {
+  margin: 0.6rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--faint);
+}
+
+/* ---------- The conversation (danmaku overlay) ---------- */
+.convo {
+  margin-top: 2rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1.6rem;
+}
+.convo-h {
+  font-size: 1.2rem;
+}
+.convo-sub {
+  color: var(--faint);
+  font-size: 0.85rem;
+  margin: 0.3rem 0 1rem;
+}
+.danmaku {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.2rem;
+  padding: 0.5rem 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.danmaku-lane {
+  position: relative;
+  height: 40px;
+  overflow: hidden;
+  container-type: inline-size;
+}
+.danmaku-pill {
+  position: absolute;
+  top: 5px;
+  white-space: nowrap;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--c, var(--accent)) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c, var(--accent)) 45%, transparent);
+  will-change: transform;
+  animation-name: drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.danmaku-name {
+  color: var(--muted);
+  font-style: normal;
+}
+@keyframes drift {
+  from {
+    transform: translateX(100cqw);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+.danmaku:hover .danmaku-pill {
+  animation-play-state: paused;
+}
+.convo-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.convo-name {
+  flex: 0 0 160px;
+}
+.convo-text {
+  flex: 1 1 220px;
+}
+.convo-name,
+.convo-text {
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 0.92rem;
+}
+.convo-name:focus,
+.convo-text:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.convo-send {
+  padding: 0.7rem 1.3rem;
+  border-radius: 10px;
+  border: 1px solid var(--accent);
+  background: rgba(94, 234, 212, 0.12);
+  color: var(--ink);
+  font-weight: 600;
+  cursor: pointer;
+}
+.convo-send:hover {
+  background: rgba(94, 234, 212, 0.22);
+}
+.convo-msg {
+  margin: 0.7rem 0 0;
+  font-size: 0.85rem;
+}
+.convo-msg.ok {
+  color: var(--up);
+}
+.convo-msg.err {
+  color: var(--down);
+}
+@media (prefers-reduced-motion: reduce) {
+  .danmaku-pill {
+    animation: none;
+    position: static;
+    display: inline-block;
+    margin: 0.2rem;
+  }
+  .danmaku-lane {
+    height: auto;
+  }
+  .danmaku {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0.6rem;
+  }
+}
+
+/* ---------- Moderation page ---------- */
+.admin {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(1.4rem, 4vw, 2.4rem);
+}
+.admin-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.admin-h {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 2rem;
+  margin: 1.2rem 0 0.3rem;
+}
+.admin-sub {
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+}
+.admin-login {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 440px;
+}
+.admin-login input {
+  flex: 1;
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink);
+}
+.admin-login button,
+.admin-logout {
+  padding: 0.6rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid var(--accent);
+  background: rgba(94, 234, 212, 0.12);
+  color: var(--ink);
+  font-weight: 600;
+  cursor: pointer;
+}
+.admin-logout {
+  border-color: var(--line);
+  background: transparent;
+  color: var(--muted);
+}
+.admin-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1.4rem 0 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.admin-tab {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.admin-tab.on {
+  border-color: var(--accent);
+  color: var(--ink);
+  background: rgba(94, 234, 212, 0.1);
+}
+.admin-refresh {
+  margin-left: auto;
+  padding: 0.45rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.admin-empty {
+  color: var(--faint);
+}
+.admin-list {
+  display: grid;
+  gap: 0.8rem;
+}
+.admin-item {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+}
+.admin-item-meta {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+  margin-bottom: 0.5rem;
+}
+.admin-brief {
+  color: var(--accent);
+}
+.admin-text {
+  margin: 0 0 0.8rem;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.admin-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.admin-actions button {
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.admin-approve {
+  border-color: rgba(52, 211, 153, 0.5) !important;
+  color: var(--up) !important;
+}
+.admin-reject {
+  border-color: rgba(251, 191, 36, 0.5) !important;
+  color: var(--amber) !important;
+}
+.admin-delete {
+  border-color: rgba(248, 113, 113, 0.5) !important;
+  color: var(--down) !important;
+}
+
 /* ---------- Reveal animation ---------- */
 .reveal {
   opacity: 0;

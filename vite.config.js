@@ -22,6 +22,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         share: resolve(__dirname, 'share', 'index.html'),
+        admin: resolve(__dirname, 'admin', 'index.html'),
         ...briefInputs,
       },
     },

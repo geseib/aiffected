@@ -3,6 +3,8 @@ import { compute } from '../model.js';
 import { Counter, LineChart, SplitBar, Gauge } from './Charts.jsx';
 import Voice from './Voice.jsx';
 import { Glossed } from './Term.jsx';
+import BriefPoll from './BriefPoll.jsx';
+import BriefComments from './BriefComments.jsx';
 import { briefBySlug } from '../briefs.js';
 import { AUTHOR, AUTHOR_NOTE } from '../author.js';
 
@@ -265,6 +267,7 @@ export default function Brief({ slug, og = false }) {
             </p>
           </div>
         )}
+        {!og && <BriefPoll brief={b.slug} />}
         {!og && (
           <span className="brief-cta-wrap">
             <a className="brief-cta hero-cta" href={`${BASE}#${b.deep}`}>
@@ -277,6 +280,7 @@ export default function Brief({ slug, og = false }) {
           </span>
         )}
       </div>
+      {!og && <BriefComments brief={b.slug} />}
       {!og && (
         <p className="brief-foot">
           One idea from{' '}

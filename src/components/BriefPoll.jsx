@@ -1,0 +1,70 @@
+import { useEffect, useState } from 'react';
+import { POLL } from '../conversation.js';
+
+export default function BriefPoll({ brief }) {
+  const [counts, setCounts] = useState(null);
+  const [voted, setVoted] = useState(() => {
+    try {
+      return localStorage.getItem('poll:' + brief);
+    } catch {
+      return null;
+    }
+  });
+
+  useEffect(() => {
+    let ok = true;
+    fetch(`/api/poll?brief=${encodeURIComponent(brief)}`)
+      .then((r) => r.json())
+      .then((d) => ok && d.counts && setCounts(d.counts))
+      .catch(() => {});
+    return () => {
+      ok = false;
+    };
+  }, [brief]);
+
+  const vote = (opt) => {
+    if (voted) return;
+    setVoted(opt);
+    try {
+      localStorage.setItem('poll:' + brief, opt);
+    } catch {}
+    setCounts((c) => ({ ...(c || {}), [opt]: ((c && c[opt]) || 0) + 1 })); // optimistic
+    fetch('/api/poll', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ brief, option: opt }),
+    })
+      .then((r) => r.json())
+      .then((d) => d.counts && setCounts(d.counts))
+      .catch(() => {});
+  };
+
+  const total = counts ? Object.values(counts).reduce((a, b) => a + b, 0) : 0;
+
+  return (
+    <div className="poll">
+      <h3 className="poll-q">{POLL.question}</h3>
+      <div className="poll-opts">
+        {POLL.options.map((o) => {
+          const n = counts ? counts[o.id] || 0 : 0;
+          const pct = total ? Math.round((n / total) * 100) : 0;
+          return (
+            <button
+              key={o.id}
+              className={`poll-opt ${voted ? 'done' : ''} ${voted === o.id ? 'mine' : ''}`}
+              onClick={() => vote(o.id)}
+              disabled={!!voted}
+            >
+              <span className="poll-fill" style={{ width: voted ? `${pct}%` : '0%' }} />
+              <span className="poll-label">{o.label}</span>
+              {voted && <span className="poll-pct">{pct}%</span>}
+            </button>
+          );
+        })}
+      </div>
+      <p className="poll-total">
+        {voted ? `${total.toLocaleString()} ${total === 1 ? 'vote' : 'votes'} so far` : 'Cast your vote'}
+      </p>
+    </div>
+  );
+}
