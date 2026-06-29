@@ -186,8 +186,8 @@ export const VOICES = {
     pos: 85,
     counter: 'bessen',
     quote:
-      'The most important question in 21st-century economics may well be: what should we do with all the superfluous people?',
-    preview: 'What should we do with all the “superfluous” people?',
+      'The most important question in twenty-first-century economics may well be what to do with all the superfluous people, once we have highly intelligent non-conscious algorithms that can do almost everything better than humans.',
+    preview: 'What to do with all the superfluous people, once algorithms do almost everything better than us?',
     context:
       'Harari’s “useless class” — his deliberately brutal name for the people an automated economy may no longer need. Wave 3, stated as bluntly as it gets.',
     source: {

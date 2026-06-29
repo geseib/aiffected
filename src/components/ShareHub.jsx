@@ -62,6 +62,11 @@ export default function ShareHub() {
                 <span className="share-kicker">{b.eyebrow}</span>
                 <h3>{b.ogTitle}</h3>
                 <p>{b.ogDesc}</p>
+                {b.poll && (
+                  <p className="share-poll">
+                    <span aria-hidden="true">🗳</span> {b.poll.question}
+                  </p>
+                )}
                 <div className="share-actions">
                   <code>{shortPath}</code>
                   <button className="share-copy" onClick={() => copy(shortUrl, b.slug)}>

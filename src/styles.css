@@ -2786,6 +2786,17 @@ input[type='range']::-moz-range-thumb {
   margin: 0;
   flex: 1;
 }
+.share-poll {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0.2rem 0 0;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--accent);
+}
 .share-actions {
   display: flex;
   align-items: center;
