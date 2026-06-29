@@ -40,7 +40,9 @@ export default function BriefPoll({ brief, poll }) {
       .catch(() => {});
   };
 
-  const total = counts ? Object.values(counts).reduce((a, b) => a + b, 0) : 0;
+  // Sum only the current options' counts (ignore any orphaned ids from an
+  // earlier version of this poll) so the total and the percentages agree.
+  const total = counts ? cfg.options.reduce((a, o) => a + (counts[o.id] || 0), 0) : 0;
 
   return (
     <div className="poll">
