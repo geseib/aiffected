@@ -2977,25 +2977,45 @@ input[type='range']::-moz-range-thumb {
 }
 .danmaku-pill {
   position: absolute;
-  top: 2px;
-  white-space: nowrap;
+  top: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   max-width: 92cqw;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0.35rem 0.85rem;
+  white-space: nowrap;
+  padding: 0.3rem 0.9rem 0.3rem 0.3rem;
   border-radius: 999px;
+  font-family: var(--sans);
   font-size: 0.86rem;
   color: var(--ink);
-  background: color-mix(in srgb, var(--c, var(--accent)) 16%, #0b1119 88%);
-  border: 1px solid color-mix(in srgb, var(--c, var(--accent)) 50%, transparent);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  cursor: pointer;
   will-change: transform;
   animation-name: drift;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
-.danmaku-name {
-  color: var(--muted);
-  font-style: normal;
+.danmaku-pill:hover {
+  border-color: var(--muted);
+}
+.danmaku-ava {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(94, 234, 212, 0.1);
+  border: 1px solid rgba(94, 234, 212, 0.3);
+}
+.danmaku-txt {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 @keyframes drift {
   from {
@@ -3010,41 +3030,65 @@ input[type='range']::-moz-range-thumb {
 }
 .convo-form {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.convo-text {
+  width: 100%;
+  min-height: 96px;
+  resize: vertical;
+  padding: 0.9rem 1.05rem;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+.convo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
   flex-wrap: wrap;
 }
 .convo-name {
-  flex: 0 0 160px;
-}
-.convo-text {
-  flex: 1 1 220px;
-}
-.convo-name,
-.convo-text {
-  padding: 0.7rem 0.9rem;
+  flex: 1 1 160px;
+  padding: 0.75rem 1rem;
   border-radius: 10px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.03);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 0.92rem;
+  font-size: 0.95rem;
 }
-.convo-name:focus,
-.convo-text:focus {
+.convo-text:focus,
+.convo-name:focus {
   outline: none;
   border-color: var(--accent);
 }
+.convo-count {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--faint);
+  white-space: nowrap;
+}
 .convo-send {
-  padding: 0.7rem 1.3rem;
+  padding: 0.75rem 1.7rem;
   border-radius: 10px;
   border: 1px solid var(--accent);
   background: rgba(94, 234, 212, 0.12);
   color: var(--ink);
   font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
 }
 .convo-send:hover {
   background: rgba(94, 234, 212, 0.22);
+}
+.convo-send:disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 .convo-msg {
   margin: 0.7rem 0 0;
@@ -3055,6 +3099,75 @@ input[type='range']::-moz-range-thumb {
 }
 .convo-msg.err {
   color: var(--down);
+}
+
+/* read a comment in full */
+.cmodal-back {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  background: rgba(4, 7, 11, 0.74);
+  backdrop-filter: blur(6px);
+  animation: fadein 0.2s ease;
+}
+.cmodal {
+  position: relative;
+  max-width: 560px;
+  width: 100%;
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: 18px;
+  padding: 2.2rem clamp(1.4rem, 4vw, 2.4rem);
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8);
+  animation: popin 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.cmodal-x {
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--faint);
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.cmodal-x:hover {
+  color: var(--ink);
+}
+.cmodal-eyebrow {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+.cmodal-quote {
+  margin: 0.7rem 0 1.1rem;
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  line-height: 1.4;
+  color: var(--ink);
+  white-space: pre-wrap;
+}
+.cmodal-quote::before {
+  content: '“';
+  color: var(--accent);
+}
+.cmodal-quote::after {
+  content: '”';
+  color: var(--accent);
+}
+.cmodal-attr {
+  margin: 0;
+  font-weight: 600;
+  color: var(--muted);
 }
 @media (prefers-reduced-motion: reduce) {
   .danmaku-pill {

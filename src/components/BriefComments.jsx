@@ -1,15 +1,19 @@
 import { useEffect, useMemo, useState } from 'react';
-import { SEED_COMMENTS, PALETTE } from '../conversation.js';
+import { createPortal } from 'react-dom';
+import { SEED_COMMENTS } from '../conversation.js';
 
 const LANES = 4;
 const MAX_FLOAT = 12; // a few per lane, evenly spaced so they never overlap
-const truncate = (s) => (s.length > 60 ? s.slice(0, 59).trimEnd() + '…' : s);
+const MAXLEN = 280;
+const truncate = (s) => (s.length > 64 ? s.slice(0, 63).trimEnd() + '…' : s);
+const initial = (name) => (name ? name.trim()[0].toUpperCase() : '“');
 
 export default function BriefComments({ brief }) {
   const [comments, setComments] = useState([]);
   const [name, setName] = useState('');
   const [text, setText] = useState('');
   const [status, setStatus] = useState(null);
+  const [open, setOpen] = useState(null); // a comment being read in the modal
 
   useEffect(() => {
     let ok = true;
@@ -21,6 +25,18 @@ export default function BriefComments({ brief }) {
       ok = false;
     };
   }, [brief]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === 'Escape' && setOpen(null);
+    window.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
 
   const submit = (e) => {
     e.preventDefault();
@@ -42,10 +58,9 @@ export default function BriefComments({ brief }) {
       .catch(() => setStatus('error'));
   };
 
-  // Real approved comments first, then seeds to keep the band alive, capped.
   const floating = useMemo(() => {
-    const real = comments.map((c) => ({ text: c.text, name: c.name, color: c.color || PALETTE[0] }));
-    const seeds = SEED_COMMENTS.map((t, i) => ({ text: t, name: null, color: PALETTE[i % PALETTE.length] }));
+    const real = comments.map((c) => ({ text: c.text, name: c.name }));
+    const seeds = SEED_COMMENTS.map((t) => ({ text: t, name: null }));
     return [...real, ...seeds].slice(0, MAX_FLOAT);
   }, [comments]);
 
@@ -58,30 +73,24 @@ export default function BriefComments({ brief }) {
   return (
     <section className="convo" aria-label="The conversation">
       <h3 className="convo-h">The conversation</h3>
-      <p className="convo-sub">Hover to pause and read. Add your take — it joins once it’s approved.</p>
+      <p className="convo-sub">Hover to pause · click any comment to read it in full · add yours below.</p>
 
       <div className="danmaku">
         {lanes.map((lane, li) => {
-          // Same speed for every pill in a lane + evenly spread start offsets =
-          // a constant gap between them, so they never pile up.
-          const dur = 26 + li * 4; // seconds; lanes drift at slightly different speeds
+          const dur = 30 + li * 5; // seconds; lanes drift at slightly different speeds
           const k = lane.length || 1;
           return (
             <div className="danmaku-lane" key={li}>
               {lane.map((c, ci) => (
-                <span
+                <button
                   className="danmaku-pill"
                   key={ci}
-                  title={c.name ? `${c.text} — ${c.name}` : c.text}
-                  style={{
-                    '--c': c.color,
-                    animationDuration: `${dur}s`,
-                    animationDelay: `${(-(ci * dur) / k).toFixed(1)}s`,
-                  }}
+                  onClick={() => setOpen(c)}
+                  style={{ animationDuration: `${dur}s`, animationDelay: `${(-(ci * dur) / k).toFixed(1)}s` }}
                 >
-                  {truncate(c.text)}
-                  {c.name ? <em className="danmaku-name"> — {c.name}</em> : null}
-                </span>
+                  <span className="danmaku-ava">{initial(c.name)}</span>
+                  <span className="danmaku-txt">{truncate(c.text)}</span>
+                </button>
               ))}
             </div>
           );
@@ -89,30 +98,51 @@ export default function BriefComments({ brief }) {
       </div>
 
       <form className="convo-form" onSubmit={submit}>
-        <input
-          className="convo-name"
-          placeholder="First name (optional)"
-          value={name}
-          maxLength={40}
-          onChange={(e) => setName(e.target.value)}
-          aria-label="First name (optional)"
-        />
-        <input
+        <textarea
           className="convo-text"
-          placeholder="Add your take…"
+          placeholder="Share your take on this…"
           value={text}
-          maxLength={280}
+          maxLength={MAXLEN}
+          rows={3}
           onChange={(e) => setText(e.target.value)}
           aria-label="Your comment"
         />
-        <button className="convo-send" type="submit" disabled={status === 'sending'}>
-          {status === 'sending' ? '…' : 'Post'}
-        </button>
+        <div className="convo-row">
+          <input
+            className="convo-name"
+            placeholder="First name (optional)"
+            value={name}
+            maxLength={40}
+            onChange={(e) => setName(e.target.value)}
+            aria-label="First name (optional)"
+          />
+          <span className="convo-count">
+            {text.length}/{MAXLEN}
+          </span>
+          <button className="convo-send" type="submit" disabled={status === 'sending'}>
+            {status === 'sending' ? 'Posting…' : 'Post'}
+          </button>
+        </div>
       </form>
       {status === 'pending' && (
-        <p className="convo-msg ok">Thanks — your comment’s in the queue and will appear once it’s approved.</p>
+        <p className="convo-msg ok">Thank you — your comment is in the queue and will appear once it’s approved.</p>
       )}
-      {status === 'error' && <p className="convo-msg err">That didn’t go through. Try again in a moment.</p>}
+      {status === 'error' && <p className="convo-msg err">That didn’t go through. Please try again in a moment.</p>}
+
+      {open &&
+        createPortal(
+          <div className="cmodal-back" onClick={() => setOpen(null)}>
+            <div className="cmodal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
+              <button className="cmodal-x" onClick={() => setOpen(null)} aria-label="Close">
+                ×
+              </button>
+              <p className="cmodal-eyebrow">From the conversation</p>
+              <blockquote className="cmodal-quote">{open.text}</blockquote>
+              <p className="cmodal-attr">— {open.name ? open.name : 'Anonymous'}</p>
+            </div>
+          </div>,
+          document.body
+        )}
     </section>
   );
 }
