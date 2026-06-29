@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { SEED_COMMENTS, PALETTE } from '../conversation.js';
 
-const LANES = 3;
-const MAX_FLOAT = 30;
+const LANES = 4;
+const MAX_FLOAT = 12; // a few per lane, evenly spaced so they never overlap
+const truncate = (s) => (s.length > 60 ? s.slice(0, 59).trimEnd() + '…' : s);
 
 export default function BriefComments({ brief }) {
   const [comments, setComments] = useState([]);
@@ -60,24 +61,31 @@ export default function BriefComments({ brief }) {
       <p className="convo-sub">Hover to pause and read. Add your take — it joins once it’s approved.</p>
 
       <div className="danmaku">
-        {lanes.map((lane, li) => (
-          <div className="danmaku-lane" key={li}>
-            {lane.map((c, ci) => (
-              <span
-                className="danmaku-pill"
-                key={ci}
-                style={{
-                  '--c': c.color,
-                  animationDuration: `${16 + (c.text.length % 12)}s`,
-                  animationDelay: `${-(ci * 7) - li * 3}s`,
-                }}
-              >
-                {c.text}
-                {c.name ? <em className="danmaku-name"> — {c.name}</em> : null}
-              </span>
-            ))}
-          </div>
-        ))}
+        {lanes.map((lane, li) => {
+          // Same speed for every pill in a lane + evenly spread start offsets =
+          // a constant gap between them, so they never pile up.
+          const dur = 26 + li * 4; // seconds; lanes drift at slightly different speeds
+          const k = lane.length || 1;
+          return (
+            <div className="danmaku-lane" key={li}>
+              {lane.map((c, ci) => (
+                <span
+                  className="danmaku-pill"
+                  key={ci}
+                  title={c.name ? `${c.text} — ${c.name}` : c.text}
+                  style={{
+                    '--c': c.color,
+                    animationDuration: `${dur}s`,
+                    animationDelay: `${(-(ci * dur) / k).toFixed(1)}s`,
+                  }}
+                >
+                  {truncate(c.text)}
+                  {c.name ? <em className="danmaku-name"> — {c.name}</em> : null}
+                </span>
+              ))}
+            </div>
+          );
+        })}
       </div>
 
       <form className="convo-form" onSubmit={submit}>

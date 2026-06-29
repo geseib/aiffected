@@ -2959,29 +2959,35 @@ input[type='range']::-moz-range-thumb {
 .danmaku {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.55rem;
   margin-bottom: 1.2rem;
-  padding: 0.5rem 0;
+  padding: 0.7rem 0;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.02);
+  /* fade pills in/out at the edges so they don't pop */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
 }
 .danmaku-lane {
   position: relative;
-  height: 40px;
+  height: 36px;
   overflow: hidden;
   container-type: inline-size;
 }
 .danmaku-pill {
   position: absolute;
-  top: 5px;
+  top: 2px;
   white-space: nowrap;
-  padding: 0.35rem 0.8rem;
+  max-width: 92cqw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.35rem 0.85rem;
   border-radius: 999px;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   color: var(--ink);
-  background: color-mix(in srgb, var(--c, var(--accent)) 14%, transparent);
-  border: 1px solid color-mix(in srgb, var(--c, var(--accent)) 45%, transparent);
+  background: color-mix(in srgb, var(--c, var(--accent)) 16%, #0b1119 88%);
+  border: 1px solid color-mix(in srgb, var(--c, var(--accent)) 50%, transparent);
   will-change: transform;
   animation-name: drift;
   animation-timing-function: linear;
