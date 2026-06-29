@@ -136,11 +136,13 @@ export const BRIEFS = [
     deep: 'waves',
     cta: 'Explore the three waves →',
     poll: {
-      question: 'Are the trades and manual jobs actually next?',
+      type: 'slider',
+      question: 'How long before AI could do your job?',
       options: [
-        { id: 'yes', label: 'Yes — robotics is close' },
-        { id: 'some', label: 'Some, but not all' },
-        { id: 'safe', label: 'No, hands-on work is safe' },
+        { id: 'y2', label: '2 years', value: 2 },
+        { id: 'y5', label: '5 years', value: 5 },
+        { id: 'y10', label: '10 years', value: 10 },
+        { id: 'never', label: 'Never', value: null },
       ],
     },
     seeds: [

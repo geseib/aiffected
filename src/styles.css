@@ -2953,6 +2953,87 @@ input[type='range']::-moz-range-thumb {
   color: var(--faint);
 }
 
+/* slider poll */
+.pslider-wrap {
+  margin-top: 0.5rem;
+}
+.pslider-value {
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.pslider {
+  width: 100%;
+}
+.pslider-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--faint);
+}
+.pslider-submit {
+  margin-top: 1.1rem;
+}
+.poll-avg {
+  margin: 0.2rem 0 0;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  color: var(--ink);
+}
+.poll-avg strong {
+  color: var(--accent);
+}
+.poll-never {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.poll-dist {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 1.1rem;
+}
+.poll-dist-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.poll-dist-label {
+  width: 64px;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+.poll-dist-row.mine .poll-dist-label {
+  color: var(--accent);
+}
+.poll-dist-bar {
+  flex: 1;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+.poll-dist-fill {
+  display: block;
+  height: 100%;
+  background: rgba(94, 234, 212, 0.45);
+  transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.poll-dist-row.mine .poll-dist-fill {
+  background: var(--accent);
+}
+.poll-dist-pct {
+  width: 38px;
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
 /* ---------- The conversation (danmaku overlay) ---------- */
 .convo {
   /* it's a <section>, so reset the global section padding/max-width/centering */
