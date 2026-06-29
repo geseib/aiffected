@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { SEED_COMMENTS } from '../conversation.js';
 
 const LANES = 4;
-const MAX_FLOAT = 12; // a few per lane, evenly spaced so they never overlap
+const MAX_FLOAT = 20; // a few per lane, evenly spaced so they never overlap
 const MAXLEN = 280;
 const truncate = (s) => (s.length > 64 ? s.slice(0, 63).trimEnd() + '…' : s);
 const initial = (name) => (name ? name.trim()[0].toUpperCase() : '“');
@@ -13,7 +13,7 @@ export default function BriefComments({ brief }) {
   const [name, setName] = useState('');
   const [text, setText] = useState('');
   const [status, setStatus] = useState(null);
-  const [open, setOpen] = useState(null); // a comment being read in the modal
+  const [openIdx, setOpenIdx] = useState(null); // index into `floating`
 
   useEffect(() => {
     let ok = true;
@@ -25,18 +25,6 @@ export default function BriefComments({ brief }) {
       ok = false;
     };
   }, [brief]);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e) => e.key === 'Escape' && setOpen(null);
-    window.addEventListener('keydown', onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      window.removeEventListener('keydown', onKey);
-      document.body.style.overflow = prev;
-    };
-  }, [open]);
 
   const submit = (e) => {
     e.preventDefault();
@@ -66,9 +54,30 @@ export default function BriefComments({ brief }) {
 
   const lanes = useMemo(() => {
     const out = Array.from({ length: LANES }, () => []);
-    floating.forEach((c, i) => out[i % LANES].push(c));
+    floating.forEach((c, i) => out[i % LANES].push({ ...c, idx: i }));
     return out;
   }, [floating]);
+
+  // Modal browsing: ← / → flip through, Esc closes.
+  const len = floating.length;
+  useEffect(() => {
+    if (openIdx == null) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setOpenIdx(null);
+      else if (e.key === 'ArrowRight') setOpenIdx((i) => (i + 1) % len);
+      else if (e.key === 'ArrowLeft') setOpenIdx((i) => (i - 1 + len) % len);
+    };
+    window.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [openIdx, len]);
+
+  const cur = openIdx != null ? floating[openIdx] : null;
+  const step = (d) => setOpenIdx((i) => (i + d + len) % len);
 
   return (
     <section className="convo" aria-label="The conversation">
@@ -77,16 +86,19 @@ export default function BriefComments({ brief }) {
 
       <div className="danmaku">
         {lanes.map((lane, li) => {
-          const dur = 30 + li * 5; // seconds; lanes drift at slightly different speeds
+          const dur = 34 + li * 6; // seconds; lanes drift at slightly different speeds
           const k = lane.length || 1;
           return (
             <div className="danmaku-lane" key={li}>
               {lane.map((c, ci) => (
                 <button
                   className="danmaku-pill"
-                  key={ci}
-                  onClick={() => setOpen(c)}
-                  style={{ animationDuration: `${dur}s`, animationDelay: `${(-(ci * dur) / k).toFixed(1)}s` }}
+                  key={c.idx}
+                  onClick={() => setOpenIdx(c.idx)}
+                  style={{
+                    animationDuration: `${dur}s`,
+                    animationDelay: `${(-(ci * dur) / k).toFixed(1)}s`,
+                  }}
                 >
                   <span className="danmaku-ava">{initial(c.name)}</span>
                   <span className="danmaku-txt">{truncate(c.text)}</span>
@@ -129,16 +141,28 @@ export default function BriefComments({ brief }) {
       )}
       {status === 'error' && <p className="convo-msg err">That didn’t go through. Please try again in a moment.</p>}
 
-      {open &&
+      {cur &&
         createPortal(
-          <div className="cmodal-back" onClick={() => setOpen(null)}>
+          <div className="cmodal-back" onClick={() => setOpenIdx(null)}>
             <div className="cmodal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
-              <button className="cmodal-x" onClick={() => setOpen(null)} aria-label="Close">
+              <button className="cmodal-x" onClick={() => setOpenIdx(null)} aria-label="Close">
                 ×
               </button>
               <p className="cmodal-eyebrow">From the conversation</p>
-              <blockquote className="cmodal-quote">{open.text}</blockquote>
-              <p className="cmodal-attr">— {open.name ? open.name : 'Anonymous'}</p>
+              <blockquote className="cmodal-quote">{cur.text}</blockquote>
+              <p className="cmodal-attr">— {cur.name ? cur.name : 'Anonymous'}</p>
+              <div className="cmodal-nav">
+                <button onClick={() => step(-1)} aria-label="Previous comment">
+                  ←
+                </button>
+                <span className="cmodal-count">
+                  {openIdx + 1} / {len}
+                </span>
+                <button onClick={() => step(1)} aria-label="Next comment">
+                  →
+                </button>
+              </div>
+              <p className="cmodal-hint">Use ← → to browse</p>
             </div>
           </div>,
           document.body

@@ -2959,15 +2959,18 @@ input[type='range']::-moz-range-thumb {
 .danmaku {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
-  margin-bottom: 1.2rem;
-  padding: 0.7rem 0;
+  gap: 0.6rem;
+  margin: 0 0 1.4rem;
+  padding: 0.9rem 0;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 16px;
   background: rgba(255, 255, 255, 0.02);
+  /* break out of the narrow brief column to a wide, full-bleed band */
+  width: min(94vw, 1280px);
+  margin-left: calc(50% - min(47vw, 640px));
   /* fade pills in/out at the edges so they don't pop */
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 }
 .danmaku-lane {
   position: relative;
@@ -3168,6 +3171,40 @@ input[type='range']::-moz-range-thumb {
   margin: 0;
   font-weight: 600;
   color: var(--muted);
+}
+.cmodal-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+}
+.cmodal-nav button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.cmodal-nav button:hover {
+  border-color: var(--accent);
+  background: rgba(94, 234, 212, 0.08);
+}
+.cmodal-count {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.cmodal-hint {
+  margin: 0.7rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--faint);
 }
 @media (prefers-reduced-motion: reduce) {
   .danmaku-pill {
