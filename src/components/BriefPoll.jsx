@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { POLL } from '../conversation.js';
 
-export default function BriefPoll({ brief }) {
+export default function BriefPoll({ brief, poll }) {
+  const cfg = poll || POLL; // fall back to the shared default if a brief has none
   const [counts, setCounts] = useState(null);
   const [voted, setVoted] = useState(() => {
     try {
@@ -43,9 +44,9 @@ export default function BriefPoll({ brief }) {
 
   return (
     <div className="poll">
-      <h3 className="poll-q">{POLL.question}</h3>
+      <h3 className="poll-q">{cfg.question}</h3>
       <div className="poll-opts">
-        {POLL.options.map((o) => {
+        {cfg.options.map((o) => {
           const n = counts ? counts[o.id] || 0 : 0;
           const pct = total ? Math.round((n / total) * 100) : 0;
           return (

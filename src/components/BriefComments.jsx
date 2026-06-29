@@ -2,13 +2,16 @@ import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { SEED_COMMENTS } from '../conversation.js';
 
+
+
 const LANES = 4;
 const MAX_FLOAT = 20; // a few per lane, evenly spaced so they never overlap
 const MAXLEN = 280;
 const truncate = (s) => (s.length > 64 ? s.slice(0, 63).trimEnd() + '…' : s);
 const initial = (name) => (name ? name.trim()[0].toUpperCase() : '“');
 
-export default function BriefComments({ brief }) {
+export default function BriefComments({ brief, seeds }) {
+  const seedList = seeds && seeds.length ? seeds : SEED_COMMENTS;
   const [comments, setComments] = useState([]);
   const [name, setName] = useState('');
   const [text, setText] = useState('');
@@ -48,9 +51,9 @@ export default function BriefComments({ brief }) {
 
   const floating = useMemo(() => {
     const real = comments.map((c) => ({ text: c.text, name: c.name }));
-    const seeds = SEED_COMMENTS.map((t) => ({ text: t, name: null }));
-    return [...real, ...seeds].slice(0, MAX_FLOAT);
-  }, [comments]);
+    const starters = seedList.map((t) => ({ text: t, name: null }));
+    return [...real, ...starters].slice(0, MAX_FLOAT);
+  }, [comments, seedList]);
 
   const lanes = useMemo(() => {
     const out = Array.from({ length: LANES }, () => []);

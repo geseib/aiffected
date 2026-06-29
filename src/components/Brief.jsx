@@ -267,7 +267,7 @@ export default function Brief({ slug, og = false }) {
             </p>
           </div>
         )}
-        {!og && <BriefPoll brief={b.slug} />}
+        {!og && <BriefPoll brief={b.slug} poll={b.poll} />}
         {!og && (
           <span className="brief-cta-wrap">
             <a className="brief-cta hero-cta" href={`${BASE}#${b.deep}`}>
@@ -280,7 +280,7 @@ export default function Brief({ slug, og = false }) {
           </span>
         )}
       </div>
-      {!og && <BriefComments brief={b.slug} />}
+      {!og && <BriefComments brief={b.slug} seeds={b.seeds} />}
       {!og && (
         <p className="brief-foot">
           One idea from{' '}
