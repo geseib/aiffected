@@ -2976,9 +2976,6 @@ input[type='range']::-moz-range-thumb {
   border: 1px solid var(--line);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.02);
-  /* break out of the narrow brief column to a wider band (between body and full-bleed) */
-  width: min(92vw, 980px);
-  margin-left: calc(50% - min(46vw, 490px));
   /* fade pills in/out at the edges so they don't pop */
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
