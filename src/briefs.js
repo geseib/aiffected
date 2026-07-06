@@ -49,11 +49,12 @@ export const BRIEFS = [
     deep: 'society',
     cta: 'Draw your own social contract →',
     poll: {
-      question: 'Take away the job — what would you miss most?',
+      question: 'Say the income’s replaced — what would you miss most then?',
       options: [
-        { id: 'income', label: 'The income' },
         { id: 'purpose', label: 'The sense of purpose' },
         { id: 'people', label: 'The people / belonging' },
+        { id: 'structure', label: 'The structure / routine' },
+        { id: 'status', label: 'The status / identity' },
       ],
     },
     seeds: [
